@@ -1,159 +1,161 @@
-import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
+import { useTranslation } from 'react-i18next'
+import { useRouteMatch } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { Card, Elevation } from '@blueprintjs/core'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import DataTable from 'ui/DataTable'
+import TimeRange from 'ui/TimeRange'
 import Pagination from 'ui/Pagination'
-import SectionHeader from 'ui/SectionHeader'
-import queryConstants from 'state/query/constants'
 import {
-  checkInit,
-  checkFetch,
-  toggleSymbol,
-  clearAllSymbols,
-} from 'state/utils'
+  SectionHeader,
+  SectionHeaderRow,
+  SectionHeaderItem,
+  SectionHeaderTitle,
+  SectionHeaderItemLabel,
+} from 'ui/SectionHeader'
+import ColumnsFilter from 'ui/ColumnsFilter'
+import SectionSwitch from 'ui/SectionSwitch'
+import ClearFiltersButton from 'ui/ClearFiltersButton'
+import MultiSymbolSelector from 'ui/MultiSymbolSelector'
+import {
+  fetchFCredit,
+  addTargetSymbol,
+  setTargetSymbols,
+  removeTargetSymbol,
+  clearTargetSymbols,
+} from 'state/fundingCreditHistory/actions'
+import {
+  getEntries,
+  getPageLoading,
+  getDataReceived,
+  getTargetSymbols,
+  getExistingCoins,
+} from 'state/fundingCreditHistory/selectors'
+import queryConstants from 'state/query/constants'
+import { getColumns } from 'state/filters/selectors'
+import { getIsSyncRequired } from 'state/sync/selectors'
+import { getColumnsWidth } from 'state/columns/selectors'
+import { getFilteredEntries } from 'state/pagination/selectors'
+import { getFullTime, getTimeOffset } from 'state/base/selectors'
+import useSymbolFilter from 'hooks/useSymbolFilter'
+import useFetchLifecycle from 'hooks/useFetchLifecycle'
 
-import { getColumns } from './FundingCreditHistory.columns'
+import { getColumns as getTableColumns } from './FundingCreditHistory.columns'
 
 const TYPE = queryConstants.MENU_FCREDIT
 
-class FundingCreditHistory extends PureComponent {
-  static propTypes = {
-    columns: PropTypes.shape({
-      amount: PropTypes.bool,
-      id: PropTypes.bool,
-      mtsLastPayout: PropTypes.bool,
-      mtsOpening: PropTypes.bool,
-      mtsUpdate: PropTypes.bool,
-      period: PropTypes.bool,
-      positionPair: PropTypes.bool,
-      rate: PropTypes.bool,
-      wallet: PropTypes.bool,
-      side: PropTypes.bool,
-      status: PropTypes.bool,
-      symbol: PropTypes.bool,
-      type: PropTypes.bool,
-    }),
-    entries: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      symbol: PropTypes.string.isRequired,
-      side: PropTypes.number.isRequired,
-      amount: PropTypes.number,
-      status: PropTypes.string,
-      rate: PropTypes.oneOfType([
-        PropTypes.number,
-        PropTypes.string,
-      ]),
-      period: PropTypes.number,
-      mtsUpdate: PropTypes.number.isRequired,
-      mtsOpening: PropTypes.number,
-      mtsLastPayout: PropTypes.number,
-      positionPair: PropTypes.string,
-    })).isRequired,
-    columnsWidth: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      width: PropTypes.number.isRequired,
-    })),
-    existingCoins: PropTypes.arrayOf(PropTypes.string),
-    getFullTime: PropTypes.func.isRequired,
-    dataReceived: PropTypes.bool.isRequired,
-    pageLoading: PropTypes.bool.isRequired,
-    t: PropTypes.func.isRequired,
-    targetSymbols: PropTypes.arrayOf(PropTypes.string),
-    timeOffset: PropTypes.string.isRequired,
-  }
+const FundingCreditHistory = () => {
+  const { t } = useTranslation()
+  const dispatch = useDispatch()
+  const timeOffset = useSelector(getTimeOffset)
+  const getFullTimeFn = useSelector(getFullTime)
+  const pageLoading = useSelector(getPageLoading)
+  const match = useRouteMatch('/credits/:symbol')
+  const dataReceived = useSelector(getDataReceived)
+  const existingCoins = useSelector(getExistingCoins)
+  const isSyncRequired = useSelector(getIsSyncRequired)
+  const columns = useSelector(state => getColumns(state, TYPE))
+  const columnsWidth = useSelector(state => getColumnsWidth(state, TYPE))
+  const entries = useSelector(state => getFilteredEntries(state, TYPE, getEntries(state)))
 
-  static defaultProps = {
-    columns: {},
-    columnsWidth: [],
-    existingCoins: [],
-    targetSymbols: [],
-  }
+  useFetchLifecycle(TYPE, {
+    match,
+    pageLoading,
+    dataReceived,
+    isSyncRequired,
+    fetchData: () => dispatch(fetchFCredit()),
+    setTargetSymbols: (s) => dispatch(setTargetSymbols(s)),
+  })
 
-  componentDidMount() {
-    checkInit(this.props, TYPE)
-  }
+  const { targetSymbols, toggleSymbol, clearSymbols } = useSymbolFilter(TYPE, {
+    getTargetSymbols,
+    addTargetSymbol,
+    removeTargetSymbol,
+    clearTargetSymbols,
+  })
 
-  componentDidUpdate(prevProps) {
-    checkFetch(prevProps, this.props, TYPE)
-  }
+  const isNoData = isEmpty(entries)
+  const isLoading = !dataReceived && pageLoading
+  const tableColumns = getTableColumns({
+    t,
+    isNoData,
+    isLoading,
+    timeOffset,
+    columnsWidth,
+    filteredData: entries,
+    getFullTime: getFullTimeFn,
+  }).filter(({ id }) => columns[id])
 
-  toggleSymbol = symbol => toggleSymbol(TYPE, this.props, symbol)
-
-  clearSymbols = () => clearAllSymbols(TYPE, this.props)
-
-  render() {
-    const {
-      t,
-      columns,
-      entries,
-      timeOffset,
-      getFullTime,
-      pageLoading,
-      dataReceived,
-      columnsWidth,
-      existingCoins,
-      targetSymbols,
-    } = this.props
-    const isNoData = isEmpty(entries)
-    const isLoading = !dataReceived && pageLoading
-    const tableColumns = getColumns({
-      t,
-      isNoData,
-      isLoading,
-      timeOffset,
-      getFullTime,
-      columnsWidth,
-      filteredData: entries,
-    }).filter(({ id }) => columns[id])
-
-    let showContent
-    if (isNoData) {
-      showContent = (
-        <div className='data-table-wrapper'>
-          <DataTable
-            section={TYPE}
-            isNoData={isNoData}
-            isLoading={isLoading}
-            tableColumns={tableColumns}
-            numRows={isLoading ? 5 : 1}
-          />
-        </div>
-      )
-    } else {
-      showContent = (
-        <div className='data-table-wrapper'>
-          <DataTable
-            section={TYPE}
-            tableColumns={tableColumns}
-            numRows={isLoading ? 5 : entries.length}
-          />
-          <Pagination target={TYPE} loading={pageLoading} />
-        </div>
-      )
-    }
-
-    return (
-      <Card
-        elevation={Elevation.ZERO}
-        className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
-      >
-        <SectionHeader
-          target={TYPE}
-          showHeaderTabs
-          title='fcredit.title'
-          symbolsSelectorProps={{
-            existingCoins,
-            currentFilters: targetSymbols,
-            toggleSymbol: this.toggleSymbol,
-          }}
-          clearTargetSymbols={this.clearSymbols}
+  let showContent
+  if (isNoData) {
+    showContent = (
+      <div className='data-table-wrapper'>
+        <DataTable
+          section={TYPE}
+          isNoData={isNoData}
+          isLoading={isLoading}
+          tableColumns={tableColumns}
+          numRows={isLoading ? 5 : 1}
         />
-        {showContent}
-      </Card>
+      </div>
+    )
+  } else {
+    showContent = (
+      <div className='data-table-wrapper'>
+        <DataTable
+          section={TYPE}
+          tableColumns={tableColumns}
+          numRows={isLoading ? 5 : entries.length}
+        />
+        <Pagination
+          target={TYPE}
+          loading={pageLoading}
+        />
+      </div>
     )
   }
+
+  return (
+    <Card
+      elevation={Elevation.ZERO}
+      className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
+    >
+      <SectionHeader>
+        <SectionHeaderTitle>
+          {t('fcredit.title')}
+        </SectionHeaderTitle>
+        <SectionSwitch target={TYPE} />
+        <SectionHeaderRow>
+          <SectionHeaderItem>
+            <SectionHeaderItemLabel>
+              {t('selector.filter.date')}
+            </SectionHeaderItemLabel>
+            <TimeRange className='section-header-time-range' />
+          </SectionHeaderItem>
+          <SectionHeaderItem>
+            <SectionHeaderItemLabel>
+              {t('selector.filter.symbol')}
+            </SectionHeaderItemLabel>
+            <MultiSymbolSelector
+              existingCoins={existingCoins}
+              currentFilters={targetSymbols}
+              toggleSymbol={toggleSymbol}
+            />
+          </SectionHeaderItem>
+          <ClearFiltersButton onClick={clearSymbols} />
+          <SectionHeaderItem>
+            <SectionHeaderItemLabel>
+              {t('selector.filter.columns')}
+            </SectionHeaderItemLabel>
+            <ColumnsFilter target={TYPE} />
+          </SectionHeaderItem>
+        </SectionHeaderRow>
+      </SectionHeader>
+      {showContent}
+    </Card>
+  )
 }
 
 export default FundingCreditHistory
