@@ -1,8 +1,7 @@
 import React, { useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import _sortBy from 'lodash/sortBy'
-import { isEmpty } from '@bitfinex/lib-js-util-base'
+import { isEmpty, orderBy } from '@bitfinex/lib-js-util-base'
 
 import NoData from 'ui/NoData'
 import Chart from 'ui/Charts/Chart'
@@ -53,7 +52,7 @@ const AccountSummaryValue = () => {
   const { chartData, presentCurrencies } = useMemo(
     () => parseChartData({
       timeframe: currTimeFrame,
-      data: _sortBy(entries, ['mts']),
+      data: orderBy(entries, ['mts']),
     }), [currTimeFrame, entries],
   )
 

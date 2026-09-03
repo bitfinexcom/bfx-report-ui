@@ -2,8 +2,6 @@ import React, { useMemo, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { Card, Elevation } from '@blueprintjs/core'
-import _keys from 'lodash/keys'
-import _sortBy from 'lodash/sortBy'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import {
@@ -18,7 +16,6 @@ import DateInput from 'ui/DateInput'
 import PieChart from 'ui/Charts/PieChart'
 import InitSyncNote from 'ui/InitSyncNote'
 import SectionSwitch from 'ui/SectionSwitch'
-import { fixedFloat } from 'ui/utils'
 import { refresh, setTimestamp } from 'state/wallets/actions'
 import { setShouldRefreshAfterSync } from 'state/sync/actions'
 import {
@@ -37,43 +34,9 @@ import { isValidTimeStamp } from 'state/query/utils'
 import useFetchLifecycle from 'hooks/useFetchLifecycle'
 
 import { getColumns } from './ConcentrationRisk.columns'
+import { parseData } from './ConcentrationRisk.helpers'
 
 const TYPE = queryConstants.MENU_CONCENTRATION_RISK
-
-const parseData = (filteredData) => {
-  let allBalance = 0
-  const summaryData = filteredData.reduce((acc, entry) => {
-    const { currency, balanceUsd } = entry
-    if (balanceUsd) {
-      acc[currency] = (acc[currency] || 0) + balanceUsd
-      allBalance += balanceUsd
-    }
-    return acc
-  }, {})
-
-  const tableData = _sortBy(_keys(summaryData).map((key) => {
-    const balanceUsd = summaryData[key]
-    const percent = ((balanceUsd / allBalance) * 100)
-
-    return {
-      currency: key,
-      balanceUsd,
-      percent: fixedFloat(percent),
-    }
-  }), 'balanceUsd').reverse()
-
-  const chartData = tableData
-    .filter(({ percent }) => percent > 0.1)
-    .map(({ currency, balanceUsd }) => ({
-      name: currency,
-      value: balanceUsd,
-    }))
-
-  return {
-    tableData: _sortBy(tableData, ['balanceUsd']).reverse(),
-    chartData,
-  }
-}
 
 const ConcentrationRisk = () => {
   const { t } = useTranslation()

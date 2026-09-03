@@ -16,7 +16,7 @@
   },
   "homepage": "/",
   "dependencies": {
-    "@bitfinex/lib-js-util-base": "git+https://github.com/bitfinexcom/lib-js-util-base.git",
+    "@bitfinex/lib-js-util-base": "git+https://github.com/bitfinexcom/lib-js-util-base.git#8ac3d64c460f9468dc885f87a33251fd9f1e640f",
     "@blueprintjs/core": "3.54.0",
     "@blueprintjs/datetime": "3.24.1",
     "@blueprintjs/icons": "3.33.0",

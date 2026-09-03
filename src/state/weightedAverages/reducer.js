@@ -1,6 +1,5 @@
 import _map from 'lodash/map'
-import _sortBy from 'lodash/sortBy'
-import { isNil } from '@bitfinex/lib-js-util-base'
+import { isNil, orderBy } from '@bitfinex/lib-js-util-base'
 
 import authTypes from 'state/auth/constants'
 import queryTypes from 'state/query/constants'
@@ -71,7 +70,7 @@ export function weightedAveragesReducer(state = initialState, action) {
         dataReceived: true,
         pageLoading: false,
         nextPage,
-        entries: _sortBy(entries, (o) => o.pair),
+        entries: orderBy(entries, ['pair']),
       }
     }
     case types.FETCH_FAIL:

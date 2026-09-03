@@ -1,16 +1,27 @@
-### Asana task:
+#### Asana task:
 ...
 
-### Description:
+#### Description:
+- [ ] ...
+
+---
+#### Details:
+
 ...
 
-### Target Release:
+#### Preview:
+...
+
+
+
+#### Target Release:
 vXX.YY
 
-### Related Pull Requests:
+---
+#### Related Pull Requests:
 ...
 
-### Type:
+#### Type:
 - [ ] fix
 - [ ] refactor
 - [ ] feature
@@ -19,7 +30,7 @@ vXX.YY
 - [ ] chore
 - [ ] other (specify)
 
-### Notes:
+#### Notes:
  - [ ] includes package-lock.json change
  - [ ] includes breaking changes
  - [ ] includes new TODO/HACK lines
