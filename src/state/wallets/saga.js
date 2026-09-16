@@ -13,13 +13,13 @@ import types from './constants'
 import actions from './actions'
 import selectors from './selectors'
 
-function getReqWallets(end) {
+export function getReqWallets(end) {
   const params = end ? { end } : {}
   return makeFetchCall('getWallets', params)
 }
 
 /* eslint-disable-next-line consistent-return */
-function* fetchWallets({ payload: end }) {
+export function* fetchWallets({ payload: end }) {
   try {
     // save current query time in state for csv export reference
     yield put(actions.setTimestamp(end))
