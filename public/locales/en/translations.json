@@ -586,9 +586,10 @@
   },
   "snapshots": {
     "title": "Snapshots",
-    "query": {
-      "title": "Query",
-      "tooltip": "Select a time to query snapshots"
+    "generate": "Generate",
+    "generation": {
+      "note_1": "Select the End Time and click Generate to build a snapshot.",
+      "note_2": "If no date is selected, the snapshot is built for the current moment. Generation may take several minutes."
     }
   },
   "spayments": {
