@@ -34,11 +34,22 @@ export function fetchFail(payload) {
 }
 
 /**
- * Create an action to refresh Snapshots.
+ * Create an action to generate Snapshots from scratch.
+ * @param {number} timestamp end time, current moment if omitted
  */
-export function refresh() {
+export function generateSnapshots(timestamp) {
   return {
-    type: types.REFRESH,
+    type: types.GENERATE_SNAPSHOTS,
+    payload: timestamp,
+  }
+}
+
+/**
+ * Create an action to cancel Snapshots generation.
+ */
+export function cancelSnapshotsGeneration() {
+  return {
+    type: types.CANCEL_SNAPSHOTS_GENERATION,
   }
 }
 
@@ -54,9 +65,10 @@ export function updateSnapshots(payload) {
 }
 
 export default {
+  cancelSnapshotsGeneration,
   fetchFail,
   fetchSnapshots,
-  refresh,
+  generateSnapshots,
   setTimestamp,
   updateSnapshots,
 }
