@@ -59,12 +59,17 @@ export function snapshotsReducer(state = initialState, action) {
       }
     case types.FETCH_FAIL:
       return fetchFail(state)
-    case types.REFRESH:
+    case types.GENERATE_SNAPSHOTS:
       return {
         ...initialState,
-        dataReceived: false,
         pageLoading: true,
         timestamp: state.timestamp,
+      }
+    case types.CANCEL_SNAPSHOTS_GENERATION:
+      return {
+        ...state,
+        pageLoading: false,
+        dataReceived: true,
       }
     case authTypes.LOGOUT:
       return initialState
