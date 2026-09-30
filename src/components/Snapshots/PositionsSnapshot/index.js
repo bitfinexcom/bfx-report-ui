@@ -1,1 +1,1 @@
-export { default } from './PositionsSnapshot.container'
+export { default } from './PositionsSnapshot'
