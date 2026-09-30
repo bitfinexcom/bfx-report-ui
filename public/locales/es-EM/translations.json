@@ -586,9 +586,10 @@
   },
   "snapshots": {
     "title": "Instantánea",
-    "query": {
-      "title": "Consulta",
-      "tooltip": "Seleccione un momento para consultar instantáneas"
+    "generate": "Generar",
+    "generation": {
+      "note_1": "Seleccione la Hora de finalización y haga clic en Generar para crear una instantánea.",
+      "note_2": "Si no se selecciona ninguna fecha, la instantánea se crea para el momento actual. La generación puede tardar varios minutos."
     }
   },
   "spayments": {
