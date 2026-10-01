@@ -591,9 +591,10 @@
   },
   "snapshots": {
     "title": "快照",
-    "query": {
-      "title": "查询",
-      "tooltip": "选择快照的时间"
+    "generate": "生成",
+    "generation": {
+      "note_1": "请选择 End Time 并点击“生成”以创建快照。",
+      "note_2": "如果未选择日期，将创建当前时刻的快照。生成过程可能需要几分钟。"
     }
   },
   "spayments": {

@@ -1,1 +1,1 @@
-export { default } from './Snapshots.container'
+export { default } from './Snapshots'

@@ -4,7 +4,12 @@ import { cloneableGenerator } from '@redux-saga/testing-utils'
 import { toggleErrorDialog } from 'state/ui/actions'
 
 import actions from '../actions'
-import { fetchSnapshots, getReqSnapshots } from '../saga'
+import {
+  fetchSnapshots,
+  getReqSnapshots,
+  getReqSnapshotsCancel,
+  cancelSnapshotsGeneration,
+} from '../saga'
 
 const ERROR = { message: 'fail' }
 const END_TIMESTAMP = 1000
@@ -61,5 +66,36 @@ describe('Snapshots saga', () => {
   it('updates data', () => {
     const result = generator.next({ result: {}, error: false }).value
     expect(result).toEqual(put(actions.updateSnapshots({})))
+  })
+})
+
+describe('Snapshots generation cancel saga', () => {
+  const generator = cloneableGenerator(cancelSnapshotsGeneration)()
+
+  it('calls the interrupt API', () => {
+    const result = generator.next().value
+    expect(result).toEqual(call(getReqSnapshotsCancel))
+  })
+
+  describe('request returns error', () => {
+    let clone
+
+    beforeAll(() => {
+      clone = generator.clone()
+    })
+
+    it('raises failed action', () => {
+      const result = clone.next({ error: ERROR }).value
+      expect(result).toEqual(put(actions.fetchFail({
+        id: 'status.fail',
+        topic: 'snapshots.title',
+        detail: ERROR.message,
+      })))
+    })
+  })
+
+  it('finishes with no error', () => {
+    const result = generator.next({ result: true }).done
+    expect(result).toBe(true)
   })
 })

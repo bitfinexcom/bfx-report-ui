@@ -591,9 +591,10 @@
   },
   "snapshots": {
     "title": "Snapshot",
-    "query": {
-      "title": "Truy vấn",
-      "tooltip": "Chọn thời gian để truy vấn snapshot"
+    "generate": "Tạo",
+    "generation": {
+      "note_1": "Chọn Thời gian kết thúc và nhấn Tạo để tạo snapshot.",
+      "note_2": "Nếu không chọn ngày, snapshot sẽ được tạo cho thời điểm hiện tại. Quá trình tạo có thể mất vài phút."
     }
   },
   "spayments": {

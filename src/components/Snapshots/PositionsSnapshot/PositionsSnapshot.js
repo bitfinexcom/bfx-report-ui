@@ -1,29 +1,48 @@
 import React, { memo } from 'react'
+import PropTypes from 'prop-types'
+import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import _isNumber from 'lodash/isNumber'
 
 import DataTable from 'ui/DataTable'
 import { fixedFloat } from 'ui/utils'
 import { getFrameworkPositionsColumns } from 'utils/columns'
+import { getFullTime, getTimeOffset } from 'state/base/selectors'
 
-import { propTypes, defaultProps } from './PositionsSnapshot.props'
+const POSITIONS_ENTRIES_PROPS = PropTypes.shape({
+  id: PropTypes.number,
+  pl: PropTypes.number,
+  plUsd: PropTypes.number,
+  plPerc: PropTypes.number,
+  amount: PropTypes.number,
+  status: PropTypes.string,
+  leverage: PropTypes.number,
+  basePrice: PropTypes.number,
+  mtsCreate: PropTypes.number,
+  mtsUpdate: PropTypes.number,
+  actualPrice: PropTypes.number,
+  marginFunding: PropTypes.number,
+  pair: PropTypes.string.isRequired,
+  liquidationPrice: PropTypes.number,
+  marginFundingType: PropTypes.number,
+})
 
 const PositionsSnapshot = ({
   entries,
   isNoData,
   isLoading,
-  timeOffset,
   totalPlUsd,
-  getFullTime,
 }) => {
   const { t } = useTranslation()
+  const timeOffset = useSelector(getTimeOffset)
+  const getFullTimeFn = useSelector(getFullTime)
   const positionsColumns = getFrameworkPositionsColumns({
     t,
     isNoData,
     isLoading,
     timeOffset,
-    getFullTime,
     filteredData: entries,
+    getFullTime: getFullTimeFn,
   })
 
   return (
@@ -48,7 +67,15 @@ const PositionsSnapshot = ({
   )
 }
 
-PositionsSnapshot.propTypes = propTypes
-PositionsSnapshot.defaultProps = defaultProps
+PositionsSnapshot.propTypes = {
+  totalPlUsd: PropTypes.number,
+  isNoData: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  entries: PropTypes.arrayOf(POSITIONS_ENTRIES_PROPS).isRequired,
+}
+
+PositionsSnapshot.defaultProps = {
+  totalPlUsd: null,
+}
 
 export default memo(PositionsSnapshot)

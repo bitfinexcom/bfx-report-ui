@@ -1,4 +1,5 @@
 import React, { memo } from 'react'
+import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 
@@ -8,7 +9,16 @@ import {
   getPositionsTickersColumns,
 } from 'utils/columns'
 
-import { propTypes, defaultProps } from './TickersSnapshot.props'
+const POSITIONS_TICKERS_ENTRIES_PROPS = PropTypes.shape({
+  amount: PropTypes.number,
+  pair: PropTypes.string.isRequired,
+})
+
+const WALLETS_TICKERS_ENTRIES_PROPS = PropTypes.shape({
+  amount: PropTypes.number,
+  pair: PropTypes.string.isRequired,
+  walletType: PropTypes.string.isRequired,
+})
 
 const TickersSnapshot = ({
   isLoading,
@@ -51,7 +61,10 @@ const TickersSnapshot = ({
   )
 }
 
-TickersSnapshot.propTypes = propTypes
-TickersSnapshot.defaultProps = defaultProps
+TickersSnapshot.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
+  walletsTickersEntries: PropTypes.arrayOf(WALLETS_TICKERS_ENTRIES_PROPS).isRequired,
+  positionsTickersEntries: PropTypes.arrayOf(POSITIONS_TICKERS_ENTRIES_PROPS).isRequired,
+}
 
 export default memo(TickersSnapshot)
