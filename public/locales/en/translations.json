@@ -295,7 +295,12 @@
     "targets": "Data to Export",
     "exportFormat": "Export Format",
     "exportAsCsv": "Export as CSV",
-    "exportAsPdf": "Export as PDF"
+    "exportAsPdf": "Export as PDF",
+    "folderPerm": {
+      "title": "Issue accessing the report export folder",
+      "noAccess": "The application does not have write access to the report export folder at:",
+      "hint": "Please change the system settings or select a different export folder in the app menu"
+    }
   },
   "fcredit": {
     "title": "Funding Credits (Used)",

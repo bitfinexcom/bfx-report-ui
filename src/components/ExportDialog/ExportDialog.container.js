@@ -9,7 +9,11 @@ import { getTimeFrame } from 'state/timeRange/selectors'
 import { getIsExportDialogOpen } from 'state/ui/selectors'
 import { exportReport, prepareExport } from 'state/query/actions'
 import { getFullTime, getTimezone } from 'state/base/selectors'
-import { getExportEmail, getIsReportExporting } from 'state/query/selectors'
+import {
+  getExportEmail,
+  getIsReportExporting,
+  getReportFolderWritePerm,
+} from 'state/query/selectors'
 
 import ExportDialog from './ExportDialog'
 
@@ -21,6 +25,7 @@ const mapStateToProps = state => ({
   getFullTime: getFullTime(state),
   isOpen: getIsExportDialogOpen(state),
   isExporting: getIsReportExporting(state),
+  reportFolderWritePerm: getReportFolderWritePerm(state),
 })
 
 const mapDispatchToProps = {

@@ -8,6 +8,7 @@ import queryString from 'query-string'
 import _assign from 'lodash/assign'
 import _isArray from 'lodash/isArray'
 import _includes from 'lodash/includes'
+import _isFunction from 'lodash/isFunction'
 
 import { logger } from 'utils/logger'
 import { LANGUAGES } from 'locales/i18n'
@@ -401,8 +402,32 @@ function* getOptions({ target }) {
   return options
 }
 
+function* checkReportFolderWritePerm() {
+  let permCheck = {}
+  if (!isElectronApp) {
+    return permCheck
+  }
+  try {
+    if (_isFunction(window?.bfxReportElectronApi?.getReportFolderWritePerm)) {
+      permCheck = (yield call([window.bfxReportElectronApi, 'getReportFolderWritePerm'])) ?? {}
+    }
+  } catch (error) {
+    permCheck = {}
+    yield call(logger.error, error)
+  }
+  yield put(actions.setReportFolderWritePerm(permCheck))
+  return permCheck
+}
+
 function* exportReport({ payload: targets }) {
   try {
+    if (isElectronApp) {
+      const { invalidPath, noWritePerm } = yield call(checkReportFolderWritePerm)
+      if (invalidPath || noWritePerm) {
+        return
+      }
+    }
+
     const exportEmail = yield select(getExportEmail)
     const multiExport = []
     // eslint-disable-next-line no-restricted-syntax
@@ -460,6 +485,8 @@ function* exportReport({ payload: targets }) {
 
 function* prepareExport() {
   try {
+    yield call(checkReportFolderWritePerm)
+
     if (config.localExport) {
       yield put(actions.setExportEmail(''))
       return

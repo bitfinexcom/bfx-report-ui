@@ -7,6 +7,7 @@ export const getIsReportExporting = state => getQuery(state)?.isReportExporting 
 export const getIsPdfExportRequired = state => getQuery(state)?.isPDFRequired ?? false
 export const getIsSingleExport = state => getQuery(state)?.isSingleExport ?? true
 export const getFirstExportPath = state => getQuery(state)?.firstExportPath ?? null
+export const getReportFolderWritePerm = state => getQuery(state)?.reportFolderWritePerm ?? null
 
 export default {
   getQuery,
@@ -17,4 +18,5 @@ export default {
   getIsPdfExportRequired,
   getIsSingleExport,
   getFirstExportPath,
+  getReportFolderWritePerm,
 }

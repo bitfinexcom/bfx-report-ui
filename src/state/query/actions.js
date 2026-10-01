@@ -87,6 +87,17 @@ export function setFirstExportPath(path) {
   }
 }
 
+/**
+ * Create an action to set report folder write permission check result.
+ * @param {Object} permCheck check result from the electron api
+ */
+export function setReportFolderWritePerm(permCheck = {}) {
+  return {
+    type: types.SET_REPORT_FOLDER_WRITE_PERM,
+    payload: permCheck,
+  }
+}
+
 export default {
   exportReport,
   setRemoteUrn,
@@ -98,4 +109,5 @@ export default {
   openExportFolder,
   setIsSingleExport,
   setFirstExportPath,
+  setReportFolderWritePerm,
 }

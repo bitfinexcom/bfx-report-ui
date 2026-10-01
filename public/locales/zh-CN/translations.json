@@ -295,7 +295,12 @@
     "targets": "要导出的数据",
     "exportFormat": "导出格式",
     "exportAsCsv": "导出为 CSV",
-    "exportAsPdf": "导出为 PDF"
+    "exportAsPdf": "导出为 PDF",
+    "folderPerm": {
+      "title": "访问报告导出文件夹时出现问题",
+      "noAccess": "应用程序对以下报告导出文件夹没有写入权限：",
+      "hint": "请更改系统设置，或在应用菜单中选择其他导出文件夹"
+    }
   },
   "fcredit": {
     "title": "融资 (已使用)",
