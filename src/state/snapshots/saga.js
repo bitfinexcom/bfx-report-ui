@@ -64,7 +64,7 @@ function* fetchSnapshotsFail({ payload }) {
 }
 
 export default function* snapshotsSaga() {
-  yield takeLatest([types.FETCH_SNAPSHOTS, types.GENERATE_SNAPSHOTS], fetchSnapshots)
+  yield takeLatest(types.FETCH_SNAPSHOTS, fetchSnapshots)
   yield takeLatest(types.FETCH_FAIL, fetchSnapshotsFail)
   yield takeLatest(types.CANCEL_SNAPSHOTS_GENERATION, cancelSnapshotsGeneration)
 }

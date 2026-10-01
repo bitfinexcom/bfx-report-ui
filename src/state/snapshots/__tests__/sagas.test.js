@@ -15,7 +15,7 @@ const ERROR = { message: 'fail' }
 const END_TIMESTAMP = 1000
 
 describe('Snapshots saga', () => {
-  const generator = cloneableGenerator(fetchSnapshots)(actions.generateSnapshots(END_TIMESTAMP))
+  const generator = cloneableGenerator(fetchSnapshots)(actions.fetchSnapshots(END_TIMESTAMP))
 
   it('sets the timestamp', () => {
     const result = generator.next().value

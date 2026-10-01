@@ -36,14 +36,14 @@ describe('Snapshots state', () => {
       })
   })
 
-  it('should start generation from scratch', () => {
+  it('should fetch snapshots from scratch', () => {
     const state = {
       ...initialState,
       timestamp: 1000,
       dataReceived: true,
       positionsTotalPlUsd: 10,
     }
-    expect(reducer(state, actions.generateSnapshots(2000)))
+    expect(reducer(state, actions.fetchSnapshots(2000)))
       .toEqual({
         ...initialState,
         pageLoading: true,

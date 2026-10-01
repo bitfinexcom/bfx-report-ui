@@ -17,7 +17,7 @@ import {
   SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
 import {
-  generateSnapshots,
+  fetchSnapshots,
   cancelSnapshotsGeneration,
 } from 'state/snapshots/actions'
 import {
@@ -94,7 +94,7 @@ const Snapshots = () => {
   }, [])
 
   const handleGenerate = useCallback(
-    () => dispatch(generateSnapshots(endTime?.getTime())),
+    () => dispatch(fetchSnapshots(endTime?.getTime())),
     [dispatch, endTime],
   )
 

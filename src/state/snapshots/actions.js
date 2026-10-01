@@ -2,7 +2,7 @@ import types from './constants'
 
 /**
  * Create an action to fetch Snapshots data.
- * @param {string} timestamp param from url
+ * @param {number} timestamp end time, current moment if omitted
  */
 export function fetchSnapshots(timestamp) {
   return {
@@ -34,17 +34,6 @@ export function fetchFail(payload) {
 }
 
 /**
- * Create an action to generate Snapshots from scratch.
- * @param {number} timestamp end time, current moment if omitted
- */
-export function generateSnapshots(timestamp) {
-  return {
-    type: types.GENERATE_SNAPSHOTS,
-    payload: timestamp,
-  }
-}
-
-/**
  * Create an action to cancel Snapshots generation.
  */
 export function cancelSnapshotsGeneration() {
@@ -68,7 +57,6 @@ export default {
   cancelSnapshotsGeneration,
   fetchFail,
   fetchSnapshots,
-  generateSnapshots,
   setTimestamp,
   updateSnapshots,
 }
