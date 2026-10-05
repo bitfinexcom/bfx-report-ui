@@ -1,1 +1,1 @@
-export { default } from './FeesReport.container'
+export { default } from './FeesReport'
