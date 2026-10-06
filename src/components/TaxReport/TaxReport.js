@@ -1,9 +1,14 @@
-import React, { useMemo, useEffect, useCallback } from 'react'
+import React, {
+  useRef,
+  useMemo,
+  useEffect,
+  useCallback,
+} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import classNames from 'classnames'
 import { Card, Elevation } from '@blueprintjs/core'
-import { isEmpty } from '@bitfinex/lib-js-util-base'
+import { isEmpty, isEqual } from '@bitfinex/lib-js-util-base'
 
 import DataTable from 'ui/DataTable'
 import {
@@ -46,6 +51,7 @@ const TYPE = queryConstants.MENU_TAX_REPORT
 const TaxReport = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
+  const lastFetchParams = useRef(null)
   const timeRange = useSelector(getTimeRange)
   const strategy = useSelector(getTransactionsStrategy)
   const entries = useSelector(getTransactionsDataEntries)
@@ -60,20 +66,17 @@ const TaxReport = () => {
   const isLoading = !dataReceived && pageLoading
   const isFirstSyncing = useSelector(getIsFirstSyncing)
   const shouldRefreshAfterSync = useSelector(getShouldRefreshAfterSync)
-  const shouldFetchTaxReport = !isSyncRequired && !dataReceived && !isLoading
   const paramChangerClass = classNames({ disabled: isFirstSyncing || isLoading })
 
+  // Single fetch point, so mount, params change and sync refresh can't overlap
   useEffect(() => {
-    if (shouldFetchTaxReport) dispatch(fetchTaxReportTransactions())
-    if (shouldRefreshAfterSync && !isSyncRequired) {
-      dispatch(fetchTaxReportTransactions())
-      dispatch(setShouldRefreshAfterSync(false))
-    }
-  }, [shouldFetchTaxReport, shouldRefreshAfterSync, isSyncRequired])
-
-  useEffect(() => {
-    if (!isSyncRequired) dispatch(fetchTaxReportTransactions())
-  }, [timeRange, strategy, shouldFeesBeDeducted])
+    if (isSyncRequired) return
+    const params = { strategy, timeRange, shouldFeesBeDeducted }
+    if (!shouldRefreshAfterSync && isEqual(lastFetchParams.current, params)) return
+    lastFetchParams.current = params
+    dispatch(fetchTaxReportTransactions())
+    if (shouldRefreshAfterSync) dispatch(setShouldRefreshAfterSync(false))
+  }, [strategy, timeRange, isSyncRequired, shouldFeesBeDeducted, shouldRefreshAfterSync])
 
   const handleDeductFees = useCallback((value) => {
     dispatch(setDeductFees(value))
