@@ -23,7 +23,7 @@
     "@blueprintjs/select": "3.19.1",
     "@blueprintjs/table": "3.5.0",
     "@blueprintjs/timezone": "3.10.1",
-    "@hcaptcha/react-hcaptcha": "2.0.2",
+    "@hcaptcha/react-hcaptcha": "2.2.0",
     "axios": "1.20.0",
     "bignumber.js": "9.3.1",
     "classnames": "2.5.1",
