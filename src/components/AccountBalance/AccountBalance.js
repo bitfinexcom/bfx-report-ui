@@ -1,9 +1,14 @@
-import React, { useEffect, useMemo, useCallback } from 'react'
+import React, {
+  useRef,
+  useMemo,
+  useEffect,
+  useCallback,
+} from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { Card, Elevation } from '@blueprintjs/core'
 import classNames from 'classnames'
-import { isEmpty, orderBy } from '@bitfinex/lib-js-util-base'
+import { isEmpty, isEqual, orderBy } from '@bitfinex/lib-js-util-base'
 
 import {
   SectionHeader,
@@ -20,11 +25,7 @@ import InitSyncNote from 'ui/InitSyncNote'
 import TimeFrameSelector from 'ui/TimeFrameSelector'
 import parseChartData from 'ui/Charts/Charts.helpers'
 import UnrealizedProfitSelector from 'ui/UnrealizedProfitSelector'
-import {
-  refresh,
-  setParams,
-  fetchBalance,
-} from 'state/accountBalance/actions'
+import { setParams, fetchBalance } from 'state/accountBalance/actions'
 import {
   getEntries,
   getTimeframe,
@@ -44,6 +45,7 @@ import { setShouldRefreshAfterSync } from 'state/sync/actions'
 const AccountBalance = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
+  const lastFetchParams = useRef(null)
   const entries = useSelector(getEntries)
   const timeFrame = useSelector(getTimeframe)
   const timeRange = useSelector(getTimeRange)
@@ -59,13 +61,15 @@ const AccountBalance = () => {
   const shouldRefreshAfterSync = useSelector(getShouldRefreshAfterSync)
   const shouldFetchAccountBalance = !dataReceived && !pageLoading && !isSyncRequired
 
+  // Single fetch point, so mount, params change and sync refresh can't overlap
   useEffect(() => {
-    if (shouldFetchAccountBalance) dispatch(fetchBalance({ useDefaults: false }))
-    if (shouldRefreshAfterSync && !isSyncRequired) {
-      dispatch(fetchBalance({ useDefaults: false }))
-      dispatch(setShouldRefreshAfterSync(false))
-    }
-  }, [timeRange, shouldFetchAccountBalance, shouldRefreshAfterSync])
+    if (isSyncRequired) return
+    const params = { timeFrame, timeRange, isProfitExcluded }
+    if (!shouldFetchAccountBalance && !shouldRefreshAfterSync && isEqual(lastFetchParams.current, params)) return
+    lastFetchParams.current = params
+    dispatch(fetchBalance({ useDefaults: false }))
+    if (shouldRefreshAfterSync) dispatch(setShouldRefreshAfterSync(false))
+  }, [timeFrame, timeRange, isSyncRequired, isProfitExcluded, shouldRefreshAfterSync, shouldFetchAccountBalance])
 
   const handleTimeframeChange = useCallback((timeframe) => {
     dispatch(setParams({ timeframe }))
@@ -74,10 +78,6 @@ const AccountBalance = () => {
   const handleUnrealizedProfitChange = useCallback((isUnrealizedProfitExcluded) => {
     dispatch(setParams({ isUnrealizedProfitExcluded }))
   }, [dispatch, setParams])
-
-  useEffect(() => {
-    dispatch(refresh({ useDefaults: false }))
-  }, [timeFrame, isProfitExcluded])
 
   const { chartData, presentCurrencies } = useMemo(
     () => parseChartData({
