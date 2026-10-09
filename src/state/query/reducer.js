@@ -1,3 +1,5 @@
+import { isEqual } from '@bitfinex/lib-js-util-base'
+
 import authTypes from 'state/auth/constants'
 
 import types from './constants'
@@ -10,6 +12,11 @@ const initialState = {
   isPDFRequired: false,
   isSingleExport: true,
   firstExportPath: null,
+  reportFolderWritePerm: {
+    invalidPath: false,
+    noWritePerm: false,
+    reportFilePath: '',
+  },
 }
 
 export function queryReducer(state = initialState, action) {
@@ -50,6 +57,16 @@ export function queryReducer(state = initialState, action) {
         ...state,
         firstExportPath: payload,
       }
+    case types.SET_REPORT_FOLDER_WRITE_PERM: {
+      const reportFolderWritePerm = {
+        invalidPath: payload?.invalidPath ?? false,
+        noWritePerm: payload?.noWritePerm ?? false,
+        reportFilePath: payload?.reportFilePath ?? '',
+      }
+      return isEqual(reportFolderWritePerm, state.reportFolderWritePerm)
+        ? state
+        : { ...state, reportFolderWritePerm }
+    }
     case authTypes.LOGOUT:
       return initialState
     default:

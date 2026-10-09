@@ -3,8 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { Card, Elevation } from '@blueprintjs/core'
 import classNames from 'classnames'
-import _sortBy from 'lodash/sortBy'
-import { isEmpty } from '@bitfinex/lib-js-util-base'
+import { isEmpty, orderBy } from '@bitfinex/lib-js-util-base'
 
 import {
   SectionHeader,
@@ -57,7 +56,7 @@ const prepareChartData = (
 ) => {
   if (isVSAccBalanceData) {
     const { chartData, dataKeys } = parseVSAccBalanceChartData({
-      data: _sortBy(entries, ['mts']),
+      data: orderBy(entries, ['mts']),
       shouldShowYear,
       timeframe,
       t,
@@ -66,7 +65,7 @@ const prepareChartData = (
   }
 
   const { chartData, presentCurrencies } = parseChartData({
-    data: _sortBy(entries, ['mts']),
+    data: orderBy(entries, ['mts']),
     shouldShowYear,
     timeframe,
   })

@@ -295,7 +295,12 @@
     "targets": "Data to Export",
     "exportFormat": "Export Format",
     "exportAsCsv": "Export as CSV",
-    "exportAsPdf": "Export as PDF"
+    "exportAsPdf": "Export as PDF",
+    "folderPerm": {
+      "title": "Issue accessing the report export folder",
+      "noAccess": "The application does not have write access to the report export folder at:",
+      "hint": "Please change the system settings or select a different export folder in the app menu"
+    }
   },
   "fcredit": {
     "title": "Funding Credits (Used)",
@@ -586,9 +591,10 @@
   },
   "snapshots": {
     "title": "Snapshots",
-    "query": {
-      "title": "Query",
-      "tooltip": "Select a time to query snapshots"
+    "generate": "Generate",
+    "generation": {
+      "note_1": "Select the End Time and click Generate to build a snapshot.",
+      "note_2": "If no date is selected, the snapshot is built for the current moment. Generation may take several minutes."
     }
   },
   "spayments": {

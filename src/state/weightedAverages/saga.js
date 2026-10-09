@@ -14,7 +14,7 @@ import types from './constants'
 import actions from './actions'
 import { getTargetPair } from './selectors'
 
-function getWeightedAverages({ targetPair, start, end }) {
+export function getWeightedAverages({ targetPair, start, end }) {
   const params = {
     start,
     end,
@@ -24,7 +24,7 @@ function getWeightedAverages({ targetPair, start, end }) {
   return makeFetchCall('getWeightedAveragesReport', params)
 }
 
-function* fetchWeightedAverages() {
+export function* fetchWeightedAverages() {
   try {
     const targetPair = yield select(getTargetPair)
     const { start, end } = yield select(getTimeFrame)

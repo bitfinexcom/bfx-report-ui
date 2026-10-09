@@ -1,7 +1,6 @@
 import {
   call,
   put,
-  select,
   takeLatest,
 } from 'redux-saga/effects'
 
@@ -11,12 +10,13 @@ import { updateErrorStatus } from 'state/status/actions'
 
 import types from './constants'
 import actions from './actions'
-import selectors from './selectors'
 
 export const getReqSnapshots = (end) => {
   const params = end ? { end } : {}
   return makeFetchCall('getFullSnapshotReport', params)
 }
+
+export const getReqSnapshotsCancel = () => makeFetchCall('interruptOperations', { names: [types.SNAPSHOTS_CANCEL] })
 
 /* eslint-disable-next-line consistent-return */
 export function* fetchSnapshots({ payload: end }) {
@@ -40,9 +40,23 @@ export function* fetchSnapshots({ payload: end }) {
   }
 }
 
-function* refreshSnapshots() {
-  const timestamp = yield select(selectors.getTimestamp)
-  yield put(actions.fetchSnapshots(timestamp))
+export function* cancelSnapshotsGeneration() {
+  try {
+    const { error } = yield call(getReqSnapshotsCancel)
+    if (error) {
+      yield put(actions.fetchFail({
+        id: 'status.fail',
+        topic: 'snapshots.title',
+        detail: error?.message ?? JSON.stringify(error),
+      }))
+    }
+  } catch (fail) {
+    yield put(actions.fetchFail({
+      id: 'status.request.error',
+      topic: 'snapshots.title',
+      detail: JSON.stringify(fail),
+    }))
+  }
 }
 
 function* fetchSnapshotsFail({ payload }) {
@@ -51,6 +65,6 @@ function* fetchSnapshotsFail({ payload }) {
 
 export default function* snapshotsSaga() {
   yield takeLatest(types.FETCH_SNAPSHOTS, fetchSnapshots)
-  yield takeLatest(types.REFRESH, refreshSnapshots)
   yield takeLatest(types.FETCH_FAIL, fetchSnapshotsFail)
+  yield takeLatest(types.CANCEL_SNAPSHOTS_GENERATION, cancelSnapshotsGeneration)
 }

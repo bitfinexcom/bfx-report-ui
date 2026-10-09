@@ -1,6 +1,5 @@
 // https://docs.bitfinex.com/v2/reference#rest-public-status
-import _sortBy from 'lodash/sortBy'
-import { get } from '@bitfinex/lib-js-util-base'
+import { get, orderBy } from '@bitfinex/lib-js-util-base'
 
 import authTypes from 'state/auth/constants'
 import queryTypes from 'state/query/constants'
@@ -68,7 +67,7 @@ export function derivativesReducer(state = initialState, action) {
         ...state,
         dataReceived: true,
         pageLoading: false,
-        entries: _sortBy(entries, (o) => o.pair),
+        entries: orderBy(entries, ['pair']),
       }
     }
     case types.FETCH_FAIL:

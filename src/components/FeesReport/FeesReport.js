@@ -2,8 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
 import classNames from 'classnames'
-import _sortBy from 'lodash/sortBy'
-import { isEmpty } from '@bitfinex/lib-js-util-base'
+import { isEmpty, orderBy } from '@bitfinex/lib-js-util-base'
 
 import {
   SectionHeader,
@@ -116,7 +115,7 @@ class FeesReport extends PureComponent {
     } = this.props
     const paramChangerClass = classNames({ disabled: isFirstSyncing })
     const { chartData, dataKeys } = parseFeesReportChartData({
-      data: _sortBy(entries, ['mts']),
+      data: orderBy(entries, ['mts']),
       shouldShowYear,
       timeframe,
       t,

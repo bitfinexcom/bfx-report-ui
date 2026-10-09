@@ -36,16 +36,32 @@ describe('Snapshots state', () => {
       })
   })
 
-  it('should refresh data', () => {
+  it('should fetch snapshots from scratch', () => {
     const state = {
       ...initialState,
       timestamp: 1000,
+      dataReceived: true,
+      positionsTotalPlUsd: 10,
     }
-    expect(reducer(state, actions.refresh()))
+    expect(reducer(state, actions.fetchSnapshots(2000)))
       .toEqual({
         ...initialState,
         pageLoading: true,
         timestamp: state.timestamp,
+      })
+  })
+
+  it('should cancel generation', () => {
+    const state = {
+      ...initialState,
+      timestamp: 1000,
+      pageLoading: true,
+    }
+    expect(reducer(state, actions.cancelSnapshotsGeneration()))
+      .toEqual({
+        ...state,
+        pageLoading: false,
+        dataReceived: true,
       })
   })
 })

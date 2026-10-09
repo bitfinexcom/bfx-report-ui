@@ -4,7 +4,7 @@ import { mapSymbol } from 'state/symbols/utils'
 
 import types from './constants'
 
-const initialState = {
+export const initialState = {
   dataReceived: false,
   exactBalance: false,
   pageLoading: false,

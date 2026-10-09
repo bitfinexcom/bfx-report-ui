@@ -5,14 +5,13 @@ import _omit from 'lodash/omit'
 import _uniq from 'lodash/uniq'
 import _isNaN from 'lodash/isNaN'
 import _reduce from 'lodash/reduce'
-import _sortBy from 'lodash/sortBy'
 import _filter from 'lodash/filter'
 import _countBy from 'lodash/countBy'
 import _findKey from 'lodash/findKey'
 import _toString from 'lodash/toString'
 import _toNumber from 'lodash/toNumber'
 import _toInteger from 'lodash/toInteger'
-import { get, isEmpty } from '@bitfinex/lib-js-util-base'
+import { get, isEmpty, orderBy } from '@bitfinex/lib-js-util-base'
 
 import SECTION_COLUMNS, { TRANSFORMS } from 'ui/ColumnsFilter/ColumnSelector/ColumnSelector.columns'
 import FILTER_TYPES, { FILTER_QUERY_TYPES, FILTERS, FILTER_KEYS } from 'var/filterTypes'
@@ -63,7 +62,7 @@ const getValidFilters = filters => filters.filter((filter) => {
   return column && type && value !== undefined && value !== ''
 })
 
-export const getValidSortedFilters = filters => _sortBy(getValidFilters(filters), ['column', 'type', 'value'])
+export const getValidSortedFilters = filters => orderBy(getValidFilters(filters), ['column', 'type', 'value'])
 
 export const calculateFilterQuery = (filters = [], section) => {
   if (isEmpty(filters) || !section) {
@@ -170,7 +169,7 @@ export const splitWalletFilter = (filterQuery) => {
 export const encodeFilters = (filters) => {
   const validFilters = getValidFilters(filters)
 
-  return _sortBy(validFilters, 'column').reduce((acc, filter, index) => {
+  return orderBy(validFilters, ['column']).reduce((acc, filter, index) => {
     const { column, type, value } = filter
 
     return `${acc}${index ? '&' : ''}${column}=${FILTER_QUERY_TYPES[type]},${encodeURIComponent(value)}`

@@ -1,6 +1,6 @@
 {
   "name": "bfx-report-ui",
-  "version": "2.64.0",
+  "version": "2.65.0",
   "description": "Report page to overview the user actions in Bitfinex and download related csv files",
   "repository": {
     "type": "git",
@@ -16,7 +16,7 @@
   },
   "homepage": "/",
   "dependencies": {
-    "@bitfinex/lib-js-util-base": "git+https://github.com/bitfinexcom/lib-js-util-base.git",
+    "@bitfinex/lib-js-util-base": "git+https://github.com/bitfinexcom/lib-js-util-base.git#8ac3d64c460f9468dc885f87a33251fd9f1e640f",
     "@blueprintjs/core": "3.54.0",
     "@blueprintjs/datetime": "3.24.1",
     "@blueprintjs/icons": "3.33.0",
@@ -71,7 +71,8 @@
     "eslint-plugin-react": "7.32.2",
     "husky": "9.1.7",
     "jest-junit": "17.0.0",
-    "react-scripts": "5.0.1"
+    "react-scripts": "5.0.1",
+    "source-map-explorer": "2.5.3"
   },
   "scripts": {
     "prepare": "node scripts/copyFiles && node scripts/handleBptIcons && husky",
@@ -79,6 +80,7 @@
     "startAll": "concurrently \"npm run start\" \"npm run --prefix ../bfx-reports-framework startSimulEnv\" \"npm run --prefix ../bfx-reports-framework startServDev\" \"npm run --prefix ../bfx-reports-framework startDev\"",
     "startAllWeb": "concurrently \"npm run start\" \"npm run --prefix ../bfx-report startSimulEnv\" \"npm run --prefix ../bfx-report startServDev\" \"npm run --prefix ../bfx-report startDev\"",
     "build": "npm run prepare && npm run lint && cross-env REACT_APP_ENV=$CI_ENVIRONMENT_NAME react-scripts build",
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
     "test": "npm run lint && cross-env REACT_APP_ENV=testing react-scripts test --env=jsdom --modulePaths=src --verbose --color --watchAll=false",
     "lint": "eslint src scripts --ignore-path .gitignore",
     "lintFix": "eslint src scripts --fix --ignore-path .gitignore"
