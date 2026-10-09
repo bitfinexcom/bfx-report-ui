@@ -86,7 +86,7 @@
     "lintFix": "eslint src scripts --fix --ignore-path .gitignore"
   },
   "engines": {
-    "node": ">=18.17.1",
+    "node": ">=20.19.0",
     "npm": ">=9.6.7"
   },
   "jest": {
@@ -103,6 +103,7 @@
   "overrides": {
     "bfj": "9.1.3",
     "serialize-javascript": "7.0.5",
-    "html-parse-stringify2": "2.0.2"
+    "html-parse-stringify2": "2.0.2",
+    "shell-quote": "1.12.0"
   }
 }
