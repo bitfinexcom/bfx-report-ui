@@ -7,9 +7,9 @@ import { updateErrorStatus } from 'state/status/actions'
 import types from './constants'
 import actions from './actions'
 
-const getReqPositions = () => makeFetchCall('getActivePositions')
+export const getReqPositions = () => makeFetchCall('getActivePositions')
 
-function* fetchActivePositions() {
+export function* fetchActivePositions() {
   try {
     const { result, error } = yield call(getReqPositions)
     yield put(actions.updateAPositions(result))
