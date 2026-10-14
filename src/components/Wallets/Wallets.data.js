@@ -1,12 +1,11 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
-import { withTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 import { isEmpty, isEqual } from '@bitfinex/lib-js-util-base'
 
 import DataTable from 'ui/DataTable'
 
 import { getColumns } from './Wallets.columns'
-import { WALLETS_ENTRIES_PROPS } from './Wallets.props'
 import constants from './var'
 
 const {
@@ -17,11 +16,18 @@ const {
   WALLET_CREDITLINE,
 } = constants
 
+const WALLETS_ENTRIES_PROPS = PropTypes.shape({
+  balanceUsd: PropTypes.number,
+  type: PropTypes.string.isRequired,
+  balance: PropTypes.number.isRequired,
+  currency: PropTypes.string.isRequired,
+})
+
 const WalletsData = ({
-  t,
   entries,
   isLoading,
 }) => {
+  const { t } = useTranslation()
   const exchangeData = entries.filter(entry => isEqual(entry.type, WALLET_EXCHANGE))
   const marginData = entries.filter(entry => isEqual(entry.type, WALLET_MARGIN))
   const fundingData = entries.filter(entry => isEqual(entry.type, WALLET_FUNDING))
@@ -93,9 +99,8 @@ const WalletsData = ({
 }
 
 WalletsData.propTypes = {
-  t: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
   entries: PropTypes.arrayOf(WALLETS_ENTRIES_PROPS).isRequired,
 }
 
-export default withTranslation('translations')(WalletsData)
+export default memo(WalletsData)
