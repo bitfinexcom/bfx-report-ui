@@ -1,7 +1,7 @@
-import React, { PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
+import React, { useMemo, useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useDispatch, useSelector } from 'react-redux'
 import { Card, Elevation } from '@blueprintjs/core'
-import { isEqual } from '@bitfinex/lib-js-util-base'
 
 import config from 'config'
 import DateInput from 'ui/DateInput'
@@ -14,136 +14,108 @@ import {
   SectionHeaderTitle,
   SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
+import {
+  refresh,
+  setTimestamp,
+  setExactBalance,
+} from 'state/wallets/actions'
+import {
+  getEntries,
+  getTimestamp,
+  getPageLoading,
+  getExactBalance,
+  getDataReceived,
+} from 'state/wallets/selectors'
+import useFetchLifecycle from 'hooks/useFetchLifecycle'
+import queryConstants from 'state/query/constants'
 import { isValidTimeStamp } from 'state/query/utils'
+import { getIsSyncRequired, getIsFirstSyncing } from 'state/sync/selectors'
 
 import WalletsData from './Wallets.data'
-import { propTypes, defaultProps } from './Wallets.props'
 
+const TYPE = queryConstants.MENU_WALLETS
 const isFrameworkMode = config.showFrameworkMode
 
-class Wallets extends PureComponent {
-  constructor(props) {
-    super(props)
-    const { currentTime } = props
+const Wallets = () => {
+  const { t } = useTranslation()
+  const dispatch = useDispatch()
+  const entries = useSelector(getEntries)
+  const currentTime = useSelector(getTimestamp)
+  const pageLoading = useSelector(getPageLoading)
+  const exactBalance = useSelector(getExactBalance)
+  const dataReceived = useSelector(getDataReceived)
+  const isSyncRequired = useSelector(getIsSyncRequired)
+  const isFirstSyncing = useSelector(getIsFirstSyncing)
 
-    this.state = {
-      timestamp: currentTime ? new Date(currentTime) : null,
-    }
-  }
+  useFetchLifecycle(TYPE, {
+    pageLoading,
+    dataReceived,
+    isSyncRequired,
+    fetchData: () => dispatch(refresh()),
+    params: { timestamp: currentTime, exactBalance },
+  })
 
-  componentDidMount() {
-    const {
-      fetchData,
-      pageLoading,
-      dataReceived,
-      fetchSnapshots,
-      isSyncRequired,
-    } = this.props
+  const dateValue = useMemo(
+    () => (currentTime ? new Date(currentTime) : null),
+    [currentTime],
+  )
 
-    if (!isSyncRequired && !dataReceived && !pageLoading) {
-      fetchData()
-      if (isFrameworkMode)fetchSnapshots()
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    const { isSyncRequired: prevIsSyncRequired, currentTime: prevTime, exactBalance: prevExactBalance } = prevProps
-    const {
-      fetchData, fetchSnapshots, isSyncRequired, currentTime, exactBalance,
-    } = this.props
-
-    if (isSyncRequired !== prevIsSyncRequired) {
-      fetchData()
-      if (isFrameworkMode)fetchSnapshots()
-    }
-
-    const shouldRefresh = !isEqual(prevTime, currentTime) || !isEqual(prevExactBalance, exactBalance)
-    if (shouldRefresh) {
-      this.handleRefresh()
-    }
-  }
-
-  handleDateChange = (time) => {
-    const { setTimestamp } = this.props
+  const handleDateChange = useCallback((time) => {
     const end = time && time.getTime()
     if (isValidTimeStamp(end) || time === null) {
-      this.setState({ timestamp: time })
-      setTimestamp(end)
+      dispatch(setTimestamp(end))
     }
-  }
+  }, [dispatch])
 
-  handleRefresh = () => {
-    const { refresh, fetchSnapshots } = this.props
-    const { timestamp } = this.state
-    const time = timestamp ? timestamp.getTime() : null
-    refresh()
-    if (isFrameworkMode) fetchSnapshots(time)
-  }
+  const handleExactBalanceChange = useCallback(
+    (value) => dispatch(setExactBalance(value)),
+    [dispatch],
+  )
 
-  render() {
-    const {
-      t,
-      entries,
-      pageLoading,
-      exactBalance,
-      dataReceived,
-      isFirstSyncing,
-      setExactBalance,
-      snapshotLoading,
-      snapshotReceived,
-      walletsSnapshotEntries,
-    } = this.props
-    const { timestamp } = this.state
-    const walletsData = (isFrameworkMode && exactBalance) ? walletsSnapshotEntries : entries
-    const isLoading = (!dataReceived && pageLoading)
-      || (exactBalance && !snapshotReceived && snapshotLoading)
+  const isLoading = !dataReceived && pageLoading
 
-    return (
-      <Card
-        elevation={Elevation.ZERO}
-        className='col-lg-12 col-md-12 col-sm-12 col-xs-12 section-wallets'
-      >
-        <SectionHeader>
-          <SectionHeaderTitle>
-            {t('navItems.myHistory.walletsTabs.balances')}
-          </SectionHeaderTitle>
-          {isFrameworkMode && (
-            <SectionHeaderRow>
-              <SectionHeaderItem>
-                <SectionHeaderItemLabel>
-                  {t('query.endTime')}
-                </SectionHeaderItemLabel>
-                <DateInput
-                  defaultValue={timestamp}
-                  onChange={this.handleDateChange}
-                />
-              </SectionHeaderItem>
-              <SectionHeaderItem>
-                <SectionHeaderItemLabel>
-                  {t('selector.balance-precision.title')}
-                </SectionHeaderItemLabel>
-                <BalancePrecisionSelector
-                  value={exactBalance}
-                  onChange={setExactBalance}
-                />
-              </SectionHeaderItem>
-            </SectionHeaderRow>
-          )}
-        </SectionHeader>
-        {isFirstSyncing ? (
-          <InitSyncNote />
-        ) : (
-          <WalletsData
-            isLoading={isLoading}
-            entries={walletsData}
-          />
+  return (
+    <Card
+      elevation={Elevation.ZERO}
+      className='col-lg-12 col-md-12 col-sm-12 col-xs-12 section-wallets'
+    >
+      <SectionHeader>
+        <SectionHeaderTitle>
+          {t('navItems.myHistory.walletsTabs.balances')}
+        </SectionHeaderTitle>
+        {isFrameworkMode && (
+          <SectionHeaderRow>
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('query.endTime')}
+              </SectionHeaderItemLabel>
+              <DateInput
+                defaultValue={dateValue}
+                onChange={handleDateChange}
+              />
+            </SectionHeaderItem>
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('selector.balance-precision.title')}
+              </SectionHeaderItemLabel>
+              <BalancePrecisionSelector
+                value={exactBalance}
+                onChange={handleExactBalanceChange}
+              />
+            </SectionHeaderItem>
+          </SectionHeaderRow>
         )}
-      </Card>
-    )
-  }
+      </SectionHeader>
+      {isFirstSyncing ? (
+        <InitSyncNote />
+      ) : (
+        <WalletsData
+          entries={entries}
+          isLoading={isLoading}
+        />
+      )}
+    </Card>
+  )
 }
 
-Wallets.propTypes = propTypes
-Wallets.defaultProps = defaultProps
-
-export default withTranslation('translations')(Wallets)
+export default Wallets

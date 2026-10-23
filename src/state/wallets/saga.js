@@ -13,8 +13,9 @@ import types from './constants'
 import actions from './actions'
 import selectors from './selectors'
 
-export function getReqWallets(end) {
+export function getReqWallets(end, exactBalance) {
   const params = end ? { end } : {}
+  if (exactBalance) params.isCcyConvertedUsingPublicTrades = true
   return makeFetchCall('getWallets', params)
 }
 
@@ -24,7 +25,8 @@ export function* fetchWallets({ payload: end }) {
     // save current query time in state for csv export reference
     yield put(actions.setTimestamp(end))
 
-    const { result = [], error } = yield call(getReqWallets, end)
+    const exactBalance = yield select(selectors.getExactBalance)
+    const { result = [], error } = yield call(getReqWallets, end, exactBalance)
     yield put(actions.updateWallets(result))
 
     if (error) {
