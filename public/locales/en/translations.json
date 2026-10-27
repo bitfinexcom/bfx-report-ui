@@ -107,7 +107,10 @@
     "tax": "Tax Reports",
     "snapshots": "Snapshots",
     "more": "And more...",
-    "download_reports": "Download Bitfinex Reports"
+    "download_reports": "Download Bitfinex Reports",
+    "select_type": "Select download",
+    "deb_hint": "Ubuntu, Debian and derivatives",
+    "appimage_hint": "Any distribution, no installation"
   },
   "candles": {
     "title": "Candles",
