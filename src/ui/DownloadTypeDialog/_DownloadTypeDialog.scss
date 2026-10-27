@@ -1,0 +1,35 @@
+.download-type-dialog {
+  &--options {
+    display: flex;
+    gap: 15px;
+    margin: 10px 0;
+  }
+
+  &--option {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 10px;
+    text-align: center;
+    border-radius: 6px;
+    border: 1px solid var(--borderColor);
+
+    &:hover {
+      text-decoration: none;
+      border-color: var(--activeColor);
+      background-color: var(--buttonHoverBg);
+    }
+  }
+
+  &--option-label {
+    font-size: 18px;
+    color: var(--color);
+  }
+
+  &--option-hint {
+    font-size: 12px;
+    margin-top: 6px;
+    color: var(--color2);
+  }
+}
