@@ -1,4 +1,4 @@
-const shell = require('shelljs')
+const fs = require('fs')
 
 const filesMap = [
   {
@@ -18,8 +18,5 @@ const filesMap = [
 filesMap.forEach((pair) => {
   // eslint-disable-next-line no-console
   console.log(`Copying file from ${pair.source} to ${pair.destination}`)
-  const result = shell.cp(pair.source, pair.destination)
-  if (result.code === 1) {
-    throw result.stderr
-  }
+  fs.copyFileSync(pair.source, pair.destination)
 })
