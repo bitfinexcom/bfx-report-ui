@@ -107,7 +107,10 @@
     "tax": "Reportes de impuestos",
     "snapshots": "Instantánea",
     "more": "Y más...",
-    "download_reports": "Descargar Bitfinex Reports"
+    "download_reports": "Descargar Bitfinex Reports",
+    "select_type": "Selecciona la descarga",
+    "deb_hint": "Ubuntu, Debian y derivados",
+    "appimage_hint": "Cualquier distribución, sin instalación"
   },
   "candles": {
     "title": "Velas",

@@ -107,7 +107,10 @@
     "tax": "Báo cáo thuế",
     "snapshots": "Snapshot",
     "more": "Và hơn thế nữa...",
-    "download_reports": "Tải ứng dụng Báo cáo Bitfinex"
+    "download_reports": "Tải ứng dụng Báo cáo Bitfinex",
+    "select_type": "Chọn bản tải xuống",
+    "deb_hint": "Ubuntu, Debian và các bản phái sinh",
+    "appimage_hint": "Mọi bản phân phối, không cần cài đặt"
   },
   "candles": {
     "title": "Nến",

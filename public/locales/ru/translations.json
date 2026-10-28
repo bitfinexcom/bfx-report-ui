@@ -107,7 +107,10 @@
     "tax": "Налоговые отчеты",
     "snapshots": "Снэпшоты",
     "more": "И многое другое...",
-    "download_reports": "Скачать Отчеты Bitfinex"
+    "download_reports": "Скачать Отчеты Bitfinex",
+    "select_type": "Выберите вариант загрузки",
+    "deb_hint": "Ubuntu, Debian и производные",
+    "appimage_hint": "Любой дистрибутив, без установки"
   },
   "candles": {
     "title": "Свечи",
