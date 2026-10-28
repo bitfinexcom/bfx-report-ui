@@ -45,7 +45,7 @@ const DownloadTypeDialog = ({
         </div>
       </div>
       <div className={Classes.DIALOG_FOOTER}>
-        <div className={Classes.DIALOG_FOOTER_ACTIONS}>
+        <div className='download-type-dialog--footer'>
           <Button onClick={onClose}>
             {t('download.cancel')}
           </Button>
