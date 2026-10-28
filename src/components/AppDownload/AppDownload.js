@@ -1,10 +1,18 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import React, {
+  useMemo,
+  useState,
+  useEffect,
+  useCallback,
+} from 'react'
 import { useTranslation } from 'react-i18next'
 import { Button, Intent } from '@blueprintjs/core'
+import _head from 'lodash/head'
+import _size from 'lodash/size'
 
+import DownloadTypeDialog from 'ui/DownloadTypeDialog'
 import config from 'var/electronVersion'
 
-import getDownloadLink from './AppDownload.helpers'
+import getDownloadOptions from './AppDownload.helpers'
 
 const {
   DEFAULT_ELECTRON_VERSION,
@@ -14,6 +22,7 @@ const {
 const AppDownload = () => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(true)
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [latestAppVersion, setLatestAppVersion] = useState(DEFAULT_ELECTRON_VERSION)
 
   useEffect(() => {
@@ -29,10 +38,20 @@ const AppDownload = () => {
     fetchData()
   }, [])
 
-  const link = useMemo(
-    () => getDownloadLink(latestAppVersion),
+  const options = useMemo(
+    () => getDownloadOptions(latestAppVersion),
     [latestAppVersion],
   )
+
+  const onDownload = useCallback(() => {
+    if (_size(options) > 1) {
+      setIsDialogOpen(true)
+    } else {
+      window.open(_head(options).link)
+    }
+  }, [options])
+
+  const onDialogClose = useCallback(() => setIsDialogOpen(false), [])
 
   return (
     <div className='app-download'>
@@ -51,12 +70,17 @@ const AppDownload = () => {
       </ul>
       <Button
         loading={isLoading}
+        onClick={onDownload}
         intent={Intent.SUCCESS}
         className='app-download--btn'
-        onClick={() => window.open(link)}
       >
         {t('download_app.download_reports')}
       </Button>
+      <DownloadTypeDialog
+        options={options}
+        isOpen={isDialogOpen}
+        onClose={onDialogClose}
+      />
     </div>
   )
 }
