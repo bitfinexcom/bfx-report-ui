@@ -32,4 +32,9 @@
     margin-top: 6px;
     color: var(--color2);
   }
+
+  &--footer {
+    display: flex;
+    justify-content: center;
+  }
 }
