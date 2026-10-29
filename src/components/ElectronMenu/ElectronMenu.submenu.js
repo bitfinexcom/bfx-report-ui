@@ -7,13 +7,23 @@ import _filter from 'lodash/filter'
 
 import { executeMenuCommand } from 'state/electronMenu/actions'
 
+// same as Blueprint's default submenu modifiers, but with -1px offset instead of -5px:
+// electron menus have no padding to compensate, only the 1px border
+const SUBMENU_POPOVER_PROPS = {
+  modifiers: {
+    offset: { offset: -1 },
+    flip: { boundariesElement: 'viewport', padding: 20 },
+    preventOverflow: { boundariesElement: 'viewport', padding: 20 },
+  },
+}
+
 const SubMenu = ({ label, items }) => {
   const dispatch = useDispatch()
   const visibleItems = _filter(items, 'visible')
 
   return (
     <div className='electron-menu-submenu'>
-      <MenuItem text={label}>
+      <MenuItem text={label} popoverProps={SUBMENU_POPOVER_PROPS}>
         {_map(visibleItems, ({
           id, label: itemLabel, accelerator, enabled,
         }, index) => (
