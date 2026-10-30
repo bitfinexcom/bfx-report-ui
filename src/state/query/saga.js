@@ -39,7 +39,7 @@ import { getTargetPairs as getPositionsPairs } from 'state/positions/selectors'
 import { getTimestamp as getSnapshotsTimestamp } from 'state/snapshots/selectors'
 import { getTargetSymbols as getSPaymentsSymbols } from 'state/stakingPayments/selectors'
 import { getParams as getTradedVolumeParams } from 'state/tradedVolume/selectors'
-import { getTimestamp } from 'state/wallets/selectors'
+import { getTimestamp, getExactBalance } from 'state/wallets/selectors'
 import {
   getIsFundingFees,
   getIsTradingFees,
@@ -239,6 +239,7 @@ function* getOptions({ target }) {
   const isVsAccountBalanceSelected = showFrameworkMode ? yield select(getIsVsAccountBalanceSelected) : ''
   const isPdfExportRequired = showFrameworkMode ? yield select(getIsPdfExportRequired) : false
   const taxReportStrategy = showFrameworkMode ? yield select(getTransactionsStrategy) : ''
+  const exactBalance = showFrameworkMode ? yield select(getExactBalance) : false
 
   switch (target) {
     case MENU_ACCOUNT_BALANCE:
@@ -252,6 +253,9 @@ function* getOptions({ target }) {
       options.symbol = formatSymbol(target, sign.pair)
       break
     case MENU_WALLETS:
+      options.end = sign || undefined
+      if (exactBalance) options.isCcyConvertedUsingPublicTrades = true
+      break
     case MENU_SNAPSHOTS:
       options.end = sign || undefined
       break

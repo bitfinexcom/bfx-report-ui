@@ -1,9 +1,10 @@
-import { put, call } from 'redux-saga/effects'
+import { put, call, select } from 'redux-saga/effects'
 import { cloneableGenerator } from '@redux-saga/testing-utils'
 
 import { toggleErrorDialog } from 'state/ui/actions'
 
 import actions from '../actions'
+import { getExactBalance } from '../selectors'
 import { getReqWallets, fetchWallets } from '../saga'
 
 const TIMESTAMP = 1000
@@ -17,9 +18,27 @@ describe('Wallets saga', () => {
     expect(result).toEqual(put(actions.setTimestamp(TIMESTAMP)))
   })
 
-  it('calls the API', () => {
+  it('selects the exact balance', () => {
     const result = generator.next().value
-    expect(result).toEqual(call(getReqWallets, TIMESTAMP))
+    expect(result).toEqual(select(getExactBalance))
+  })
+
+  describe('exact balance is selected', () => {
+    let clone
+
+    beforeAll(() => {
+      clone = generator.clone()
+    })
+
+    it('calls the API with public trades conversion', () => {
+      const result = clone.next(true).value
+      expect(result).toEqual(call(getReqWallets, TIMESTAMP, true))
+    })
+  })
+
+  it('calls the API', () => {
+    const result = generator.next(false).value
+    expect(result).toEqual(call(getReqWallets, TIMESTAMP, false))
   })
 
   describe('request returns error', () => {
