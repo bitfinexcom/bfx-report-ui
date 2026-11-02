@@ -13,7 +13,7 @@ import types from './constants'
 import actions from './actions'
 import selectors from './selectors'
 
-const getReqOrderTrades = ({ id, targetPair }) => {
+export const getReqOrderTrades = ({ id, targetPair }) => {
   const params = {
     id,
     symbol: formatRawSymbols(mapRequestPairs(targetPair, true)),
@@ -21,7 +21,7 @@ const getReqOrderTrades = ({ id, targetPair }) => {
   return makeFetchCall('getOrderTrades', params)
 }
 
-function* fetchOrderTrades() {
+export function* fetchOrderTrades() {
   try {
     const params = yield select(selectors.getParams)
     const { result, error } = yield call(getReqOrderTrades, params)
