@@ -50,6 +50,19 @@ describe('OrderTrades state', () => {
       })
   })
 
+  it('should set target pair', () => {
+    const state = {
+      ...initialState,
+      id: 1,
+      dataReceived: true,
+    }
+    expect(reducer(state, actions.setTargetPair(TEST_PAIR)))
+      .toEqual({
+        ...initialState,
+        targetPair: TEST_PAIR,
+      })
+  })
+
   it('should set params', () => {
     const params = {
       id: 1,
