@@ -23,11 +23,8 @@ const config = {
   DEFAULT_ELECTRON_VERSION,
   getElectronReleaseLink: ({ version, platform, ext = getDefaultExt(platform) }) => {
     const normVersion = version.replace('v', '')
-    const currExt = isEqual(normVersion, DEFAULT_ELECTRON_VERSION)
-      ? getDefaultExt(platform)
-      : ext
 
-    return `${APP_RELEASES_URL}/${version}/BitfinexReport-${normVersion}-x64-${platform}.${currExt}`
+    return `${APP_RELEASES_URL}v${normVersion}/BitfinexReport-${normVersion}-x64-${platform}.${ext}`
   },
 }
 

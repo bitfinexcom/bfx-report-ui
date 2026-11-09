@@ -107,7 +107,10 @@
     "tax": "稅務報告",
     "snapshots": "快照",
     "more": "以及更多...",
-    "download_reports": "下載Bitfinex報告應用程式"
+    "download_reports": "下載Bitfinex報告應用程式",
+    "select_type": "選擇下載版本",
+    "deb_hint": "Ubuntu、Debian 及其衍生版",
+    "appimage_hint": "適用於任何發行版，無需安裝"
   },
   "candles": {
     "title": "陰陽燭",
