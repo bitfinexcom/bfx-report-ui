@@ -1,5 +1,7 @@
-import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
+import React, { useMemo, useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useRouteMatch } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { Card, Elevation } from '@blueprintjs/core'
 import classNames from 'classnames'
 import { isEmpty, orderBy } from '@bitfinex/lib-js-util-base'
@@ -22,176 +24,180 @@ import ReportTypeSelector from 'ui/ReportTypeSelector'
 import ClearFiltersButton from 'ui/ClearFiltersButton'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 import { parseFeesReportChartData } from 'ui/Charts/Charts.helpers'
-import queryConstants from 'state/query/constants'
-import constants from 'ui/ReportTypeSelector/constants'
 import {
-  checkInit,
-  checkFetch,
-  toggleSymbol,
-  clearAllSymbols,
-} from 'state/utils'
+  setParams,
+  setReportType,
+  fetchFeesReport,
+  addTargetSymbol,
+  setTargetSymbols,
+  removeTargetSymbol,
+  clearTargetSymbols,
+} from 'state/feesReport/actions'
+import { setShouldRefreshAfterSync } from 'state/sync/actions'
+import {
+  getParams,
+  getEntries,
+  getReportType,
+  getPageLoading,
+  getDataReceived,
+  getTargetSymbols,
+  getCurrentFetchParams,
+} from 'state/feesReport/selectors'
+import {
+  getIsSyncRequired,
+  getIsFirstSyncing,
+  getShouldRefreshAfterSync,
+} from 'state/sync/selectors'
+import queryConstants from 'state/query/constants'
+import useSymbolFilter from 'hooks/useSymbolFilter'
+import useFetchLifecycle from 'hooks/useFetchLifecycle'
+import reportTypeConstants from 'ui/ReportTypeSelector/constants'
+import { getIsTimeframeMoreThanYear } from 'state/timeRange/selectors'
 
 const TYPE = queryConstants.MENU_FEES_REPORT
 
 const getReportTypeParams = (type) => {
   switch (type) {
-    case constants.TRADING_FEES:
+    case reportTypeConstants.TRADING_FEES:
       return { isTradingFees: true, isFundingFees: false }
-    case constants.FUNDING_FEES:
+    case reportTypeConstants.FUNDING_FEES:
       return { isTradingFees: false, isFundingFees: true }
-    case constants.FUNDING_TRADING_FEES:
+    case reportTypeConstants.FUNDING_TRADING_FEES:
       return { isTradingFees: true, isFundingFees: true }
     default:
       return { isTradingFees: true, isFundingFees: false }
   }
 }
 
-class FeesReport extends PureComponent {
-  static propTypes = {
-    currentFetchParams: PropTypes.shape({
-      timeframe: PropTypes.string,
-      targetPairs: PropTypes.arrayOf(PropTypes.string),
-    }),
-    dataReceived: PropTypes.bool.isRequired,
-    entries: PropTypes.arrayOf(PropTypes.shape({
-      mts: PropTypes.number.isRequired,
-    })),
-    isFirstSyncing: PropTypes.bool.isRequired,
-    pageLoading: PropTypes.bool.isRequired,
-    params: PropTypes.shape({
-      timeframe: PropTypes.string,
-      targetPairs: PropTypes.arrayOf(PropTypes.string),
-    }),
-    reportType: PropTypes.string.isRequired,
-    setParams: PropTypes.func.isRequired,
-    setReportType: PropTypes.func.isRequired,
-    shouldShowYear: PropTypes.bool.isRequired,
-    t: PropTypes.func.isRequired,
-    targetSymbols: PropTypes.arrayOf(PropTypes.string),
-  }
+const FeesReport = () => {
+  const { t } = useTranslation()
+  const dispatch = useDispatch()
+  const params = useSelector(getParams)
+  const entries = useSelector(getEntries)
+  const reportType = useSelector(getReportType)
+  const pageLoading = useSelector(getPageLoading)
+  const dataReceived = useSelector(getDataReceived)
+  const match = useRouteMatch('/fees_report/:symbol')
+  const isSyncRequired = useSelector(getIsSyncRequired)
+  const isFirstSyncing = useSelector(getIsFirstSyncing)
+  const currentFetchParams = useSelector(getCurrentFetchParams)
+  const shouldShowYear = useSelector(getIsTimeframeMoreThanYear)
+  const shouldRefreshAfterSync = useSelector(getShouldRefreshAfterSync)
 
-  static defaultProps = {
-    params: {},
-    entries: [],
-    targetSymbols: [],
-    currentFetchParams: {},
-  }
+  const { timeframe } = params
+  const { timeframe: currTimeframe } = currentFetchParams
 
-  componentDidMount() {
-    checkInit(this.props, TYPE)
-  }
+  useFetchLifecycle(TYPE, {
+    match,
+    params,
+    pageLoading,
+    dataReceived,
+    isSyncRequired,
+    shouldRefreshAfterSync,
+    fetchData: () => dispatch(fetchFeesReport()),
+    setTargetSymbols: (s) => dispatch(setTargetSymbols(s)),
+    setShouldRefreshAfterSync: (v) => dispatch(setShouldRefreshAfterSync(v)),
+  })
 
-  componentDidUpdate(prevProps) {
-    checkFetch(prevProps, this.props, TYPE)
-  }
+  const { targetSymbols, toggleSymbol, clearSymbols } = useSymbolFilter(TYPE, {
+    getTargetSymbols,
+    addTargetSymbol,
+    removeTargetSymbol,
+    clearTargetSymbols,
+  })
 
-  handleTimeframeChange = (timeframe) => {
-    const { setParams } = this.props
-    setParams({ timeframe })
-  }
+  const handleTimeframeChange = useCallback((tf) => {
+    dispatch(setParams({ timeframe: tf }))
+  }, [dispatch])
 
-  toggleSymbol = symbol => toggleSymbol(TYPE, this.props, symbol)
+  const handleReportTypeChange = useCallback((type) => {
+    dispatch(setReportType(type))
+    dispatch(setParams(getReportTypeParams(type)))
+  }, [dispatch])
 
-  clearSymbols = () => clearAllSymbols(TYPE, this.props)
-
-  handleReportTypeChange = (type) => {
-    const { setParams, setReportType } = this.props
-    const params = getReportTypeParams(type)
-    setReportType(type)
-    setParams(params)
-  }
-
-  render() {
-    const {
+  const { chartData, dataKeys } = useMemo(
+    () => parseFeesReportChartData({
       t,
-      entries,
-      reportType,
-      pageLoading,
-      dataReceived,
-      targetSymbols,
       shouldShowYear,
-      isFirstSyncing,
-      params: { timeframe },
-    } = this.props
-    const paramChangerClass = classNames({ disabled: isFirstSyncing })
-    const { chartData, dataKeys } = parseFeesReportChartData({
+      timeframe: currTimeframe,
       data: orderBy(entries, ['mts']),
-      shouldShowYear,
-      timeframe,
-      t,
-    })
+    }),
+    [entries, currTimeframe, shouldShowYear, t],
+  )
 
-    let showContent
-    if (isFirstSyncing) {
-      showContent = <InitSyncNote />
-    } else if (!dataReceived && pageLoading) {
-      showContent = <Loading />
-    } else if (isEmpty(entries)) {
-      showContent = <NoData />
-    } else {
-      showContent = (
-        <Chart
-          isSumUpEnabled
-          data={chartData}
-          dataKeys={dataKeys}
-        />
-      )
-    }
-    return (
-      <Card
-        elevation={Elevation.ZERO}
-        className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
-      >
-        <SectionHeader>
-          <SectionHeaderTitle>
-            {t('feesreport.title')}
-          </SectionHeaderTitle>
-          <SectionSwitch target={TYPE} />
-          <SectionHeaderRow>
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('selector.filter.date')}
-              </SectionHeaderItemLabel>
-              <TimeRange className={paramChangerClass} />
-            </SectionHeaderItem>
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('selector.filter.symbol')}
-              </SectionHeaderItemLabel>
-              <MultiSymbolSelector
-                className={paramChangerClass}
-                currentFilters={targetSymbols}
-                toggleSymbol={this.toggleSymbol}
-              />
-            </SectionHeaderItem>
-            <ClearFiltersButton onClick={this.clearSymbols} />
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('selector.select')}
-              </SectionHeaderItemLabel>
-              <TimeFrameSelector
-                value={timeframe}
-                className={paramChangerClass}
-                onChange={this.handleTimeframeChange}
-              />
-            </SectionHeaderItem>
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('selector.report-type.title')}
-              </SectionHeaderItemLabel>
-              <ReportTypeSelector
-                section={TYPE}
-                value={reportType}
-                className={paramChangerClass}
-                onChange={this.handleReportTypeChange}
-              />
-            </SectionHeaderItem>
-          </SectionHeaderRow>
-        </SectionHeader>
-        {showContent}
-      </Card>
+  const paramChangerClass = classNames({ disabled: isFirstSyncing })
+
+  let showContent
+  if (isFirstSyncing) {
+    showContent = <InitSyncNote />
+  } else if (!dataReceived && pageLoading) {
+    showContent = <Loading />
+  } else if (isEmpty(entries)) {
+    showContent = <NoData />
+  } else {
+    showContent = (
+      <Chart
+        isSumUpEnabled
+        data={chartData}
+        dataKeys={dataKeys}
+      />
     )
   }
+
+  return (
+    <Card
+      elevation={Elevation.ZERO}
+      className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
+    >
+      <SectionHeader>
+        <SectionHeaderTitle>
+          {t('feesreport.title')}
+        </SectionHeaderTitle>
+        <SectionSwitch target={TYPE} />
+        <SectionHeaderRow>
+          <SectionHeaderItem>
+            <SectionHeaderItemLabel>
+              {t('selector.filter.date')}
+            </SectionHeaderItemLabel>
+            <TimeRange className={paramChangerClass} />
+          </SectionHeaderItem>
+          <SectionHeaderItem>
+            <SectionHeaderItemLabel>
+              {t('selector.filter.symbol')}
+            </SectionHeaderItemLabel>
+            <MultiSymbolSelector
+              toggleSymbol={toggleSymbol}
+              className={paramChangerClass}
+              currentFilters={targetSymbols}
+            />
+          </SectionHeaderItem>
+          <ClearFiltersButton onClick={clearSymbols} />
+          <SectionHeaderItem>
+            <SectionHeaderItemLabel>
+              {t('selector.select')}
+            </SectionHeaderItemLabel>
+            <TimeFrameSelector
+              value={timeframe}
+              className={paramChangerClass}
+              onChange={handleTimeframeChange}
+            />
+          </SectionHeaderItem>
+          <SectionHeaderItem>
+            <SectionHeaderItemLabel>
+              {t('selector.report-type.title')}
+            </SectionHeaderItemLabel>
+            <ReportTypeSelector
+              section={TYPE}
+              value={reportType}
+              className={paramChangerClass}
+              onChange={handleReportTypeChange}
+            />
+          </SectionHeaderItem>
+        </SectionHeaderRow>
+      </SectionHeader>
+      {showContent}
+    </Card>
+  )
 }
 
 export default FeesReport
