@@ -1,1 +1,1 @@
-export { default } from './Ledgers.container'
+export { default } from './Ledgers'
