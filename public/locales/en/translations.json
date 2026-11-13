@@ -6,7 +6,7 @@
     "title": "Account Summary",
     "fee_tier_volume": "Volume (eligible for fee tier calculation) in the last 30 days",
     "30dVolume": "Your volume in the last 30 days",
-    "margin_funds": "Total return on your margin funds provided in the last 30 days",
+    "margin_funds": "Total lending earnings (last 30 days)",
     "leo_level": "LEO level",
     "average_amount": "Average amount"
   },
@@ -430,7 +430,7 @@
     },
     "myHistory": {
       "title": "My History",
-      "funding": "Funding",
+      "funding": "Funding (Lending & Borrowing)",
       "fundingTabs": {
         "bidsOffers": "Bids & Offers",
         "loans": "Loans",
