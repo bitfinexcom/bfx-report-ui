@@ -30,7 +30,13 @@ const useFetchLifecycle = (type, {
   // URL -> Redux hydration (mount only). Decoupled from sync-gated fetch so
   // selections from URL survive framework-mode reloads where isSyncRequired
   // starts as true and fetch is deferred until initial sync completes.
+  // Skipped when the section already has data or is loading: the setters
+  // reset loaded entries while the pagination state stays untouched.
   useEffect(() => {
+    if (dataReceived || pageLoading) {
+      return
+    }
+
     // multi-pair from URL (MENU_TRADES, MENU_ORDERS, MENU_DERIVATIVES, etc.)
     if (setTargetPairs && match?.params?.pair) {
       setTargetPairs(getMappedSymbolsFromUrl(match.params.pair))
