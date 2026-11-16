@@ -6,7 +6,7 @@
     "title": "帐号摘要",
     "fee_tier_volume": "过去30天交易量（符合手续费等级计算）",
     "30dVolume": "过去30天交易量",
-    "margin_funds": "过去30天提供的保证金借贷之总收益",
+    "margin_funds": "借贷总收益（过去30天）",
     "leo_level": "LEO级别",
     "average_amount": "平均数量"
   },
@@ -430,7 +430,7 @@
     },
     "myHistory": {
       "title": "账号历史记录",
-      "funding": "融资",
+      "funding": "融资 (放贷和借款)",
       "fundingTabs": {
         "bidsOffers": "买入价和卖出价",
         "loans": "借贷",

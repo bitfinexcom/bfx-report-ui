@@ -6,7 +6,7 @@
     "title": "Tóm tắt tài khoản",
     "fee_tier_volume": "Khối lượng giao dịch (đủ điều kiện để tính mức phí) trong 30 ngày qua",
     "30dVolume": "Khối lượng giao dịch trong 30 ngày qua của bạn",
-    "margin_funds": "Tổng tiền lãi trên khoản vay ký quỹ được cung cấp trong 30 ngày qua của bạn",
+    "margin_funds": "Tổng thu nhập từ cho vay (30 ngày qua)",
     "leo_level": "Cấp LEO",
     "average_amount": "Số lượng tiền trung bình"
   },
@@ -430,7 +430,7 @@
     },
     "myHistory": {
       "title": "Lịch sử của tôi",
-      "funding": "Cấp vốn",
+      "funding": "Cấp vốn (Cho vay & Đi vay)",
       "fundingTabs": {
         "bidsOffers": "Giá mua & chào bán",
         "loans": "Khoảng vay",
