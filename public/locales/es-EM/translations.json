@@ -6,7 +6,7 @@
     "title": "Resumen de la cuenta",
     "fee_tier_volume": "Volumen (elegible para calcular el nivel de comisiones) en los últimos 30 dias",
     "30dVolume": "Tu volumen en los últimos 30 días",
-    "margin_funds": "Retorno total de fondos proporcionados para margen en los últimos 30 días",
+    "margin_funds": "Ganancias totales de préstamos (últimos 30 días)",
     "leo_level": "nivel LEO",
     "average_amount": "Monto promedio"
   },
@@ -430,7 +430,7 @@
     },
     "myHistory": {
       "title": "Mi historial",
-      "funding": "Financiamiento",
+      "funding": "Financiamiento (prestar y pedir prestado)",
       "fundingTabs": {
         "bidsOffers": "Bids y ofertas",
         "loans": "Préstamos",

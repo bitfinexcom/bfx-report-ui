@@ -6,7 +6,7 @@
     "title": "帳戶摘要",
     "fee_tier_volume": "過去30天交易量（符合手續費等級計算）",
     "30dVolume": "過去30天交易量",
-    "margin_funds": "過去30天提供的保證金融資之總收益",
+    "margin_funds": "放貸總收益（過去30天）",
     "leo_level": "LEO級別\n",
     "average_amount": "平均數量"
   },
@@ -430,7 +430,7 @@
     },
     "myHistory": {
       "title": "帳戶歷史紀錄",
-      "funding": "融資",
+      "funding": "融資（放貸和借款）",
       "fundingTabs": {
         "bidsOffers": "借入和出借",
         "loans": "融資（未使用）",
