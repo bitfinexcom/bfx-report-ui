@@ -14,7 +14,7 @@ const transactionsInitState = {
   shouldFeesBeDeducted: deductFeesTypes.FALSE,
 }
 
-const initialState = {
+export const initialState = {
   transactions: transactionsInitState,
 }
 
