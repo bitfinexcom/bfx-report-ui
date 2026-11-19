@@ -12,6 +12,8 @@ on:
 jobs:
   linux-test-runner:
     name: Linux Test Runner
+    permissions:
+      contents: read
     timeout-minutes: 90
     runs-on: ubuntu-22.04
     steps:
