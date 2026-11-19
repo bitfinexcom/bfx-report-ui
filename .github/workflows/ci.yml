@@ -12,6 +12,8 @@ on:
 jobs:
   linux-test-runner:
     name: Linux Test Runner
+    permissions:
+      contents: read
     timeout-minutes: 90
     runs-on: ubuntu-22.04
     steps:
@@ -21,7 +23,7 @@ jobs:
         submodules: recursive
     - uses: actions/setup-node@v6.3.0
       with:
-        node-version: 24.14.0
+        node-version: 24.22.1
     - name: Install deps
       run: npm ci && npm run prepare
     - name: Run tests
