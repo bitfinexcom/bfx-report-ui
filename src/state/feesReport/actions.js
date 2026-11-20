@@ -94,5 +94,6 @@ export default {
   removeTargetSymbol,
   setParams,
   setReportType,
+  setTargetSymbols,
   updateFeesReport,
 }

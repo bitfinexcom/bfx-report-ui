@@ -6,7 +6,7 @@
     "title": "Tóm tắt tài khoản",
     "fee_tier_volume": "Khối lượng giao dịch (đủ điều kiện để tính mức phí) trong 30 ngày qua",
     "30dVolume": "Khối lượng giao dịch trong 30 ngày qua của bạn",
-    "margin_funds": "Tổng tiền lãi trên khoản vay ký quỹ được cung cấp trong 30 ngày qua của bạn",
+    "margin_funds": "Tổng thu nhập từ cho vay (30 ngày qua)",
     "leo_level": "Cấp LEO",
     "average_amount": "Số lượng tiền trung bình"
   },
@@ -107,7 +107,10 @@
     "tax": "Báo cáo thuế",
     "snapshots": "Snapshot",
     "more": "Và hơn thế nữa...",
-    "download_reports": "Tải ứng dụng Báo cáo Bitfinex"
+    "download_reports": "Tải ứng dụng Báo cáo Bitfinex",
+    "select_type": "Chọn bản tải xuống",
+    "deb_hint": "Ubuntu, Debian và các bản phái sinh",
+    "appimage_hint": "Mọi bản phân phối, không cần cài đặt"
   },
   "candles": {
     "title": "Nến",
@@ -427,7 +430,7 @@
     },
     "myHistory": {
       "title": "Lịch sử của tôi",
-      "funding": "Cấp vốn",
+      "funding": "Cấp vốn (Cho vay & Đi vay)",
       "fundingTabs": {
         "bidsOffers": "Giá mua & chào bán",
         "loans": "Khoảng vay",

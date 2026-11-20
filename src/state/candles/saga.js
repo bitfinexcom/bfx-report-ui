@@ -21,7 +21,7 @@ import selectors from './selectors'
 
 const now = new Date().getTime()
 
-const getReqCandles = (params) => {
+export const getReqCandles = (params) => {
   const {
     start,
     end,
@@ -37,7 +37,7 @@ const getReqCandles = (params) => {
   })
 }
 
-const getReqTrades = (params) => {
+export const getReqTrades = (params) => {
   const { start, end, pair } = params
 
   return makeFetchCall('getTrades', {
@@ -47,7 +47,7 @@ const getReqTrades = (params) => {
   })
 }
 
-function* fetchData(section, data, method) {
+export function* fetchData(section, data, method) {
   const params = yield select(selectors.getParams)
   const { start, end } = yield select(getTimeFrame, data.nextPage)
   const { result, error } = yield call(method, {

@@ -6,7 +6,7 @@
     "title": "帳戶摘要",
     "fee_tier_volume": "過去30天交易量（符合手續費等級計算）",
     "30dVolume": "過去30天交易量",
-    "margin_funds": "過去30天提供的保證金融資之總收益",
+    "margin_funds": "放貸總收益（過去30天）",
     "leo_level": "LEO級別\n",
     "average_amount": "平均數量"
   },
@@ -107,7 +107,10 @@
     "tax": "稅務報告",
     "snapshots": "快照",
     "more": "以及更多...",
-    "download_reports": "下載Bitfinex報告應用程式"
+    "download_reports": "下載Bitfinex報告應用程式",
+    "select_type": "選擇下載版本",
+    "deb_hint": "Ubuntu、Debian 及其衍生版",
+    "appimage_hint": "適用於任何發行版，無需安裝"
   },
   "candles": {
     "title": "陰陽燭",
@@ -427,7 +430,7 @@
     },
     "myHistory": {
       "title": "帳戶歷史紀錄",
-      "funding": "融資",
+      "funding": "融資（放貸和借款）",
       "fundingTabs": {
         "bidsOffers": "借入和出借",
         "loans": "融資（未使用）",

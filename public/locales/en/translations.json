@@ -6,7 +6,7 @@
     "title": "Account Summary",
     "fee_tier_volume": "Volume (eligible for fee tier calculation) in the last 30 days",
     "30dVolume": "Your volume in the last 30 days",
-    "margin_funds": "Total return on your margin funds provided in the last 30 days",
+    "margin_funds": "Total lending earnings (last 30 days)",
     "leo_level": "LEO level",
     "average_amount": "Average amount"
   },
@@ -107,7 +107,10 @@
     "tax": "Tax Reports",
     "snapshots": "Snapshots",
     "more": "And more...",
-    "download_reports": "Download Bitfinex Reports"
+    "download_reports": "Download Bitfinex Reports",
+    "select_type": "Select download",
+    "deb_hint": "Ubuntu, Debian and derivatives",
+    "appimage_hint": "Any distribution, no installation"
   },
   "candles": {
     "title": "Candles",
@@ -427,7 +430,7 @@
     },
     "myHistory": {
       "title": "My History",
-      "funding": "Funding",
+      "funding": "Funding (Lending & Borrowing)",
       "fundingTabs": {
         "bidsOffers": "Bids & Offers",
         "loans": "Loans",

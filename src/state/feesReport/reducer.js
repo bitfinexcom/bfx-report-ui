@@ -70,23 +70,24 @@ export function feesReportReducer(state = initialState, action) {
       return state.targetSymbols.includes(payload)
         ? state
         : {
-          ...initialState,
+          ...state,
           targetSymbols: [...state.targetSymbols, payload],
         }
     case types.REMOVE_SYMBOL:
       return (state.targetSymbols.includes(payload))
         ? {
-          ...initialState,
+          ...state,
           targetSymbols: state.targetSymbols.filter(symbol => symbol !== payload),
         }
         : state
     case types.CLEAR_SYMBOLS:
       return {
-        ...initialState,
+        ...state,
+        targetSymbols: [],
       }
     case types.SET_SYMBOLS:
       return {
-        ...initialState,
+        ...state,
         targetSymbols: payload,
       }
     case types.REFRESH:

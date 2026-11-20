@@ -51,4 +51,56 @@ describe('Fees Report state', () => {
         targetSymbols: state.targetSymbols,
       })
   })
+
+  describe('symbols handling keeps selected params', () => {
+    const state = {
+      ...initialState,
+      dataReceived: true,
+      isTradingFees: false,
+      isFundingFees: true,
+      targetSymbols: ['BTC'],
+      timeframe: timeframeConstants.WEEK,
+      reportType: reportTypeConstants.FUNDING_FEES,
+    }
+
+    it('should add symbol', () => {
+      expect(reducer(state, actions.addTargetSymbol('ETH')))
+        .toEqual({
+          ...state,
+          targetSymbols: ['BTC', 'ETH'],
+        })
+    })
+
+    it('should ignore already selected symbol', () => {
+      expect(reducer(state, actions.addTargetSymbol('BTC'))).toBe(state)
+    })
+
+    it('should remove symbol', () => {
+      expect(reducer(state, actions.removeTargetSymbol('BTC')))
+        .toEqual({
+          ...state,
+          targetSymbols: [],
+        })
+    })
+
+    it('should ignore removing not selected symbol', () => {
+      expect(reducer(state, actions.removeTargetSymbol('ETH'))).toBe(state)
+    })
+
+    it('should set symbols', () => {
+      expect(reducer(state, actions.setTargetSymbols(['ETH', 'XRP'])))
+        .toEqual({
+          ...state,
+          targetSymbols: ['ETH', 'XRP'],
+        })
+    })
+
+    it('should clear symbols', () => {
+      expect(reducer(state, actions.clearTargetSymbols()))
+        .toEqual({
+          ...state,
+          targetSymbols: [],
+        })
+    })
+  })
 })

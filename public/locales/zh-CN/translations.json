@@ -6,7 +6,7 @@
     "title": "帐号摘要",
     "fee_tier_volume": "过去30天交易量（符合手续费等级计算）",
     "30dVolume": "过去30天交易量",
-    "margin_funds": "过去30天提供的保证金借贷之总收益",
+    "margin_funds": "借贷总收益（过去30天）",
     "leo_level": "LEO级别",
     "average_amount": "平均数量"
   },
@@ -107,7 +107,10 @@
     "tax": "税务报告",
     "snapshots": "快照",
     "more": "更多...",
-    "download_reports": "下载 Bitfinex 报告"
+    "download_reports": "下载 Bitfinex 报告",
+    "select_type": "选择下载版本",
+    "deb_hint": "Ubuntu、Debian 及其衍生版",
+    "appimage_hint": "适用于任何发行版，无需安装"
   },
   "candles": {
     "title": "蜡烛",
@@ -427,7 +430,7 @@
     },
     "myHistory": {
       "title": "账号历史记录",
-      "funding": "融资",
+      "funding": "融资 (放贷和借款)",
       "fundingTabs": {
         "bidsOffers": "买入价和卖出价",
         "loans": "借贷",
