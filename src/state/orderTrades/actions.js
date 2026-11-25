@@ -48,7 +48,7 @@ export function updateOrderTrades(data) {
  */
 export function setTargetPair(pair) {
   return {
-    type: types.SET_PAIRS,
+    type: types.SET_PAIR,
     payload: pair,
   }
 }
