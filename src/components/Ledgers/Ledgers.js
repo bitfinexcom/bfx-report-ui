@@ -1,5 +1,7 @@
-import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
+import React, { useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useRouteMatch } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { Card, Elevation } from '@blueprintjs/core'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 
@@ -17,181 +19,158 @@ import ColumnsFilter from 'ui/ColumnsFilter'
 import ClearFiltersButton from 'ui/ClearFiltersButton'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 import LedgersCategorySelect from 'ui/LedgersCategorySelect'
-import queryConstants from 'state/query/constants'
 import {
-  checkInit,
-  checkFetch,
-  toggleSymbol,
-  clearAllSymbols,
-} from 'state/utils'
+  setParams,
+  fetchLedgers,
+  addTargetSymbol,
+  setTargetSymbols,
+  removeTargetSymbol,
+  clearTargetSymbols,
+} from 'state/ledgers/actions'
+import {
+  getEntries,
+  getPageLoading,
+  getDataReceived,
+  getExistingCoins,
+  getTargetSymbols,
+  getTargetCategory,
+} from 'state/ledgers/selectors'
+import queryConstants from 'state/query/constants'
+import { getColumns } from 'state/filters/selectors'
+import { getIsSyncRequired } from 'state/sync/selectors'
+import { getColumnsWidth } from 'state/columns/selectors'
+import { getFilteredEntries } from 'state/pagination/selectors'
+import { getFullTime, getTimeOffset } from 'state/base/selectors'
+import useSymbolFilter from 'hooks/useSymbolFilter'
+import useFetchLifecycle from 'hooks/useFetchLifecycle'
 
-import { getColumns } from './Ledgers.columns'
+import { getColumns as getTableColumns } from './Ledgers.columns'
 
 const TYPE = queryConstants.MENU_LEDGERS
 
-class Ledgers extends PureComponent {
-  static propTypes = {
-    columns: PropTypes.shape({
-      amount: PropTypes.bool,
-      amountUsd: PropTypes.bool,
-      balance: PropTypes.bool,
-      balanceUsd: PropTypes.bool,
-      currency: PropTypes.bool,
-      description: PropTypes.bool,
-      id: PropTypes.bool,
-      mts: PropTypes.bool,
-      wallet: PropTypes.bool,
-    }),
-    columnsWidth: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.string,
-      width: PropTypes.number,
-    })),
-    entries: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      amount: PropTypes.number.isRequired,
-      balance: PropTypes.number.isRequired,
-      currency: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      mts: PropTypes.number.isRequired,
-      wallet: PropTypes.string,
-    })).isRequired,
-    existingCoins: PropTypes.arrayOf(PropTypes.string),
-    getFullTime: PropTypes.func.isRequired,
-    dataReceived: PropTypes.bool.isRequired,
-    pageLoading: PropTypes.bool.isRequired,
-    t: PropTypes.func.isRequired,
-    targetSymbols: PropTypes.arrayOf(PropTypes.string),
-    setParams: PropTypes.func.isRequired,
-    timeOffset: PropTypes.string.isRequired,
-    targetCategory: PropTypes.number,
-  }
+const Ledgers = () => {
+  const { t } = useTranslation()
+  const dispatch = useDispatch()
+  const timeOffset = useSelector(getTimeOffset)
+  const getFullTimeFn = useSelector(getFullTime)
+  const match = useRouteMatch('/ledgers/:symbol')
+  const pageLoading = useSelector(getPageLoading)
+  const dataReceived = useSelector(getDataReceived)
+  const existingCoins = useSelector(getExistingCoins)
+  const isSyncRequired = useSelector(getIsSyncRequired)
+  const targetCategory = useSelector(getTargetCategory)
+  const columns = useSelector(state => getColumns(state, TYPE))
+  const columnsWidth = useSelector(state => getColumnsWidth(state, TYPE))
+  const entries = useSelector(state => getFilteredEntries(state, TYPE, getEntries(state)))
 
-  static defaultProps = {
-    columns: {},
-    columnsWidth: [],
-    existingCoins: [],
-    targetSymbols: [],
-    targetCategory: undefined,
-  }
+  useFetchLifecycle(TYPE, {
+    match,
+    pageLoading,
+    dataReceived,
+    isSyncRequired,
+    fetchData: () => dispatch(fetchLedgers()),
+    setTargetSymbols: (s) => dispatch(setTargetSymbols(s)),
+  })
 
-  componentDidMount() {
-    checkInit(this.props, TYPE)
-  }
+  const { targetSymbols, toggleSymbol, clearSymbols } = useSymbolFilter(TYPE, {
+    getTargetSymbols,
+    addTargetSymbol,
+    removeTargetSymbol,
+    clearTargetSymbols,
+  })
 
-  componentDidUpdate(prevProps) {
-    checkFetch(prevProps, this.props, TYPE)
-  }
+  const onCategoryChange = useCallback((category) => {
+    dispatch(setParams({ targetCategory: category ? +category : undefined }))
+  }, [dispatch])
 
-  toggleSymbol = symbol => toggleSymbol(TYPE, this.props, symbol)
+  const isNoData = isEmpty(entries)
+  const isLoading = !dataReceived && pageLoading
+  const tableColumns = getTableColumns({
+    t,
+    isNoData,
+    isLoading,
+    timeOffset,
+    columnsWidth,
+    filteredData: entries,
+    getFullTime: getFullTimeFn,
+  }).filter(({ id }) => columns[id])
 
-  clearSymbols = () => clearAllSymbols(TYPE, this.props)
-
-  onCategoryChange = (targetCategory) => {
-    const { setParams } = this.props
-    setParams({ targetCategory: targetCategory ? +targetCategory : undefined })
-  }
-
-  render() {
-    const {
-      t,
-      columns,
-      entries,
-      timeOffset,
-      getFullTime,
-      pageLoading,
-      dataReceived,
-      columnsWidth,
-      targetSymbols,
-      existingCoins,
-      targetCategory,
-    } = this.props
-    const isNoData = isEmpty(entries)
-    const isLoading = !dataReceived && pageLoading
-    const tableColumns = getColumns({
-      t,
-      isNoData,
-      isLoading,
-      timeOffset,
-      getFullTime,
-      columnsWidth,
-      filteredData: entries,
-    }).filter(({ id }) => columns[id])
-
-    let showContent
-    if (isNoData) {
-      showContent = (
-        <div className='data-table-wrapper'>
-          <DataTable
-            section={TYPE}
-            isNoData={isNoData}
-            isLoading={isLoading}
-            tableColumns={tableColumns}
-            numRows={isLoading ? 5 : 1}
-          />
-        </div>
-      )
-    } else {
-      showContent = (
-        <div className='data-table-wrapper'>
-          <DataTable
-            section={TYPE}
-            tableColumns={tableColumns}
-            numRows={isLoading ? 5 : entries.length}
-          />
-          <Pagination
-            target={TYPE}
-            loading={pageLoading}
-          />
-        </div>
-      )
-    }
-
-    return (
-      <Card
-        elevation={Elevation.ZERO}
-        className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
-      >
-        <SectionHeader>
-          <SectionHeaderTitle>{t('ledgers.title')}</SectionHeaderTitle>
-          <SectionHeaderRow>
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('selector.filter.date')}
-              </SectionHeaderItemLabel>
-              <TimeRange className='section-header-time-range' />
-            </SectionHeaderItem>
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('selector.filter.symbol')}
-              </SectionHeaderItemLabel>
-              <MultiSymbolSelector
-                existingCoins={existingCoins}
-                currentFilters={targetSymbols}
-                toggleSymbol={this.toggleSymbol}
-              />
-            </SectionHeaderItem>
-            <ClearFiltersButton onClick={this.clearSymbols} />
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('selector.filter.category')}
-              </SectionHeaderItemLabel>
-              <LedgersCategorySelect
-                value={targetCategory}
-                onChange={this.onCategoryChange}
-              />
-            </SectionHeaderItem>
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('selector.filter.columns')}
-              </SectionHeaderItemLabel>
-              <ColumnsFilter target={TYPE} />
-            </SectionHeaderItem>
-          </SectionHeaderRow>
-        </SectionHeader>
-        { showContent }
-      </Card>
+  let showContent
+  if (isNoData) {
+    showContent = (
+      <div className='data-table-wrapper'>
+        <DataTable
+          section={TYPE}
+          isNoData={isNoData}
+          isLoading={isLoading}
+          tableColumns={tableColumns}
+          numRows={isLoading ? 5 : 1}
+        />
+      </div>
+    )
+  } else {
+    showContent = (
+      <div className='data-table-wrapper'>
+        <DataTable
+          section={TYPE}
+          tableColumns={tableColumns}
+          numRows={isLoading ? 5 : entries.length}
+        />
+        <Pagination
+          target={TYPE}
+          loading={pageLoading}
+        />
+      </div>
     )
   }
+
+  return (
+    <Card
+      elevation={Elevation.ZERO}
+      className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
+    >
+      <SectionHeader>
+        <SectionHeaderTitle>
+          {t('ledgers.title')}
+        </SectionHeaderTitle>
+        <SectionHeaderRow>
+          <SectionHeaderItem>
+            <SectionHeaderItemLabel>
+              {t('selector.filter.date')}
+            </SectionHeaderItemLabel>
+            <TimeRange className='section-header-time-range' />
+          </SectionHeaderItem>
+          <SectionHeaderItem>
+            <SectionHeaderItemLabel>
+              {t('selector.filter.symbol')}
+            </SectionHeaderItemLabel>
+            <MultiSymbolSelector
+              existingCoins={existingCoins}
+              currentFilters={targetSymbols}
+              toggleSymbol={toggleSymbol}
+            />
+          </SectionHeaderItem>
+          <ClearFiltersButton onClick={clearSymbols} />
+          <SectionHeaderItem>
+            <SectionHeaderItemLabel>
+              {t('selector.filter.category')}
+            </SectionHeaderItemLabel>
+            <LedgersCategorySelect
+              value={targetCategory}
+              onChange={onCategoryChange}
+            />
+          </SectionHeaderItem>
+          <SectionHeaderItem>
+            <SectionHeaderItemLabel>
+              {t('selector.filter.columns')}
+            </SectionHeaderItemLabel>
+            <ColumnsFilter target={TYPE} />
+          </SectionHeaderItem>
+        </SectionHeaderRow>
+      </SectionHeader>
+      {showContent}
+    </Card>
+  )
 }
 
 export default Ledgers
